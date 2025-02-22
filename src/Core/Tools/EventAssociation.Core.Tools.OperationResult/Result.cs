@@ -1,30 +1,43 @@
 namespace EventAssociation.Core.Tools.OperationResult;
-public readonly struct Result<T, E>
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Result<T>
 {
-    private readonly T _value;
-    private readonly E _error;
-    public bool IsOk { get; }
+    private readonly T? _value;
+    private readonly List<Error>? _errors;
+    public bool IsSuccess { get; }
 
     private Result(T value)
     {
         _value = value;
-        _error = default!;
-        IsOk = true;
+        _errors = null;
+        IsSuccess = true;
     }
 
-    private Result(E error)
+    private Result(List<Error> errors)
     {
-        _value = default!;
-        _error = error;
-        IsOk = false;
+        if (errors == null || errors.Count == 0)
+        {
+            throw new ArgumentException("Error list cannot be null or empty", nameof(errors));
+        }
+
+        _value = default;
+        _errors = errors;
+        IsSuccess = false;
     }
 
-    public static Result<T, E> Ok(T value) => new(value);
-    public static Result<T, E> Err(E error) => new(error);
+    public static Result<T> Ok(T value) => new(value);
+    public static Result<T> Err(params Error[] errors) => new(errors.ToList());
 
-    public T Unwrap() => 
-        IsOk ? _value : throw new InvalidOperationException("Called Unwrap on an Err value.");
+    public T Unwrap() =>
+        IsSuccess ? _value! : throw new InvalidOperationException("Called Unwrap on an Err result.");
 
-    public E UnwrapErr() => 
-        !IsOk ? _error : throw new InvalidOperationException("Called UnwrapErr on an Ok value.");
+    public List<Error> UnwrapErr() =>
+        !IsSuccess ? _errors! : throw new InvalidOperationException("Called UnwrapErr on an Ok result.");
+
+    public bool HasErrors() => !IsSuccess && _errors is not null && _errors.Any();
 }
+

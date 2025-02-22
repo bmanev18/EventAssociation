@@ -3,23 +3,15 @@
 using EventAssociation.Core.Tools.OperationResult;
 
 Console.WriteLine("Hello, World!");
-var list = new List<Error>();
-list.Add(new Error("1234", "1234", "1234"));
-list.Add(new Error("1235", "1234", "1234"));
-list.Add(new Error("1236", "1234", "1234"));
-list.Add(new Error("1237", "1234", "1234"));
 
-var res = Result<int, List<Error>>.Err(list);
-// Console.WriteLine(res.Unwrap());
-if (res.IsOk)
-{
-    Console.WriteLine(res.Unwrap());
-}
-else
-{
-    foreach (var error in res.UnwrapErr())
-    {
-        Console.WriteLine(error.Code);
-    }
+var success = Result<int>.Ok(42);
+Console.WriteLine(success.IsSuccess); // true
+Console.WriteLine(success.Unwrap());  // 42
 
-}
+var errorResult = Result<int>.Err(
+    new Error("E001", "Invalid input"),
+    new Error("E002", "Not found")
+);
+Console.WriteLine(errorResult.IsSuccess); // false
+Console.WriteLine(errorResult.UnwrapErr().Count); // 2
+
