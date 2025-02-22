@@ -41,3 +41,9 @@ public class Result<T>
     public bool HasErrors() => !IsSuccess && _errors is not null && _errors.Any();
 }
 
+public sealed class None
+{
+    private None() { } // Prevent instantiation
+    public static readonly None Value = new None();
+}
+

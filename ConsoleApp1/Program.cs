@@ -15,3 +15,7 @@ var errorResult = Result<int>.Err(
 Console.WriteLine(errorResult.IsSuccess); // false
 Console.WriteLine(errorResult.UnwrapErr().Count); // 2
 
+
+var  noneResult = Result<None>.Ok(None.Value);
+Console.WriteLine(success.IsSuccess); // true
+
