@@ -1,8 +1,8 @@
 # Completed Feature Status
 
 - Base Classes.
-  - [ ] ValueObject Base Classes
-  - [ ] Entity Base Classes
+  - [x] ValueObject Base Classes
+  - [x] Entity Base Classes
   - [ ] Aggregate Base Classes
         
 - Use Case 1: Event creator creates new event.
