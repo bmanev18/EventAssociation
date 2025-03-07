@@ -8,11 +8,10 @@
 
     <ItemGroup>
       <Folder Include="Aggregates\Events\Bases\" />
-      <Folder Include="Aggregates\Events\Values\" />
       <Folder Include="Aggregates\Guests\Bases\" />
       <Folder Include="Aggregates\Guests\Values\" />
       <Folder Include="Aggregates\Locations\Bases\" />
-      <Folder Include="Common\Bases\" />
+      <Folder Include="Common\Values\" />
     </ItemGroup>
 
 </Project>
