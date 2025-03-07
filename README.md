@@ -1,10 +1,11 @@
 # Completed Feature Status
 
-* [] ValueObject Base Class
+- [ ] ValueObject Base Class
+- [ ] Entity Base Class
+- [ ] Aggregate Base Class
 
-* <ul>
-  <li>ValueObject Base Class ❌</li>
-  <li>Entity Base Class ❌ </li>
-  <li>Aggregate Base Class ❌ </li>
-  <li>Fourth item </li>
-</ul>
+- Use Case: Event creator creates new event.
+  - [ ] S1
+  - [ ] S2
+  - [ ] S3
+  - [ ] S4
