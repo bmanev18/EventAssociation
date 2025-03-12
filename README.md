@@ -3,7 +3,7 @@
 - Base Classes.
   - [x] ValueObject Base Classes
   - [x] Entity Base Classes
-  - [ ] Aggregate Base Classes
+  - [x] Aggregate Base Classes
         
 - Use Case 1: Event creator creates new event.
   - [ ] S1
