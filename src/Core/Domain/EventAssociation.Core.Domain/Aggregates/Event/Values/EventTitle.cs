@@ -7,14 +7,26 @@ public class EventTitle: ValueObject
 {
     public string Title { get; }
     
-    public EventTitle(string title)
+    private EventTitle(string title)
+    {
+         Title = title;
+    }
+
+    public static Result<EventTitle> CreateEventTitle(String title)
     {
         var responses = Validate(title);
-        var assertion = Result<None>.AssertResponses(responses);
-        
-        if (assertion.IsSuccess) {
-         Title = title;
+
+        var errors =  responses
+            .Where(r => !r.IsSuccess)
+            .SelectMany(r => r.UnwrapErr()) 
+            .ToList();
+
+        if (errors.Any())
+        {
+            return Result<EventTitle>.Err(errors.ToArray());
         }
+        
+        return Result<EventTitle>.Ok(new EventTitle(title));
         
     }
 
@@ -23,16 +35,16 @@ public class EventTitle: ValueObject
         yield return Title;
     }
 
-    private List<Result<None>> Validate(string value)
+    private static List<Result<None>> Validate(string value)
     {
         var results = new List<Result<None>>();
         
-        var result2 = CheckIsTitleInConstraints(value);
-        results.Add(result2);
+        var constraintsResult = CheckIsTitleInConstraints(value);
+        results.Add(constraintsResult);
         return results;
 
     }
-    private Result<None> CheckIsTitleInConstraints(string title)
+    private static Result<None> CheckIsTitleInConstraints(string title)
     {
         switch (title.Length)
         {
