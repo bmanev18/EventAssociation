@@ -31,6 +31,8 @@
       <Folder Include="Features\Guest\DeclineInvitation\" />
       <Folder Include="Features\Guest\InviteGuest\" />
       <Folder Include="Features\Guest\Participate\" />
+      <Folder Include="ValueObjects\Guest\" />
+      <Folder Include="ValueObjects\Location\" />
     </ItemGroup>
 
     <ItemGroup>
