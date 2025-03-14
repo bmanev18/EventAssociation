@@ -3,41 +3,41 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Domain.Aggregates.Event;
 
-public class Event
+public class Event: AggregateRoot
 {
-    private EventId id;
-    private EventTitle title;
-    private EventDescription description;
-    private EventTime startDate;
-    private EventTime endDate;
-    private EventMaxParticipants maxParticipants;
-    private EventType type;
-    private EventStatus status;
-    
+internal EventId Id { get; }
+    internal EventTitle Title { get; }
+    internal EventDescription Description { get; }
+    internal EventTime StartDate { get; }
+    internal EventTime EndDate { get; }
+    internal EventMaxParticipants MaxParticipants { get; }
+    internal EventType Type { get; }
+    internal EventStatus Status { get; }
+
+
     // private GuestList guestList;
 
-    private Event(EventId id, EventTitle title, EventDescription description, EventTime startDate, EventTime endDate, EventMaxParticipants maxParticipants, EventType type, EventStatus status)
+    private Event(EventId id, EventTitle title, EventDescription description, EventTime startDate, EventTime endDate,
+        EventMaxParticipants maxParticipants, EventType type, EventStatus status)
     {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.maxParticipants = maxParticipants;
-        this.type = type;
-        this.status = status;
+        this.Id = id;
+        this.Title = title;
+        this.Description = description;
+        this.StartDate = startDate;
+        this.EndDate = endDate;
+        this.MaxParticipants = maxParticipants;
+        this.Type = type;
+        this.Status = status;
     }
 
-    public Result<Event> CreateEvent(EventId id)
+    public static Result<Event> CreateEvent(EventId id)
     {
-        // var eventTitle = new EventTitle("Working Title");
-        // var eventDescription = new EventDescription(" ");
-        // Event event = new Event(id, title, eventDescription, startDate, endDate, maxParticipants, type, status); 
-        // return new Result<Event>(event);
-
+        var eventTitle = new EventTitle("Working Title");
+        var eventDescription = new EventDescription("");
+        var maxParticipants = new EventMaxParticipants(5);
+        var eventType = EventType.Private;
+        var eventStatus = EventStatus.Draft;
+        var event_ = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus);
+        return Result<Event>.Ok(event_);
     }
-    
-    
-    
-    
 }

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
@@ -22,7 +22,6 @@
 
     <ItemGroup>
       <Folder Include="Features\Event\Activate\" />
-      <Folder Include="Features\Event\CreateEvent\" />
       <Folder Include="Features\Event\MakePrivate\" />
       <Folder Include="Features\Event\MakePublic\" />
       <Folder Include="Features\Event\Ready\" />
@@ -35,6 +34,10 @@
       <Folder Include="Features\Guest\DeclineInvitation\" />
       <Folder Include="Features\Guest\InviteGuest\" />
       <Folder Include="Features\Guest\Participate\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Core\Domain\EventAssociation.Core.Domain\EventAssociation.Core.Domain.csproj" />
     </ItemGroup>
 
 </Project>
