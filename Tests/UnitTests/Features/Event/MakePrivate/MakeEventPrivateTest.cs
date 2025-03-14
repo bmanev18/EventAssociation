@@ -1,3 +1,6 @@
+using EventAssociation.Core.Domain.Aggregates.Locations;
+using EventAssociation.Core.Domain.Aggregates.Locations.Values;
+
 namespace UnitTests.Features.Event.MakePrivate;
 
 using EventAssociation.Core.Domain.Aggregates.Event;
@@ -12,11 +15,14 @@ public class MakeEventPrivateTest
         public void ChangeEventType_ShouldReturnError_WhenEventIsActiveOrCancelled()
         {
             // Arrange
-            var eventId = new EventId(Guid.NewGuid());
-            var activeEvent = Event.CreateEvent(eventId).Unwrap();
+            var locationName = LocationName.Create("Meadows").Unwrap();
+            var locationCapacity = LocationCapacity.Create(20).Unwrap();
+            var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+
+            var activeEvent = Event.CreateEvent(location, EventType.Public).Unwrap();
             activeEvent.ChangeEventStatusToActive();
             
-            var cancelledEvent = Event.CreateEvent(eventId).Unwrap();
+            var cancelledEvent = Event.CreateEvent(location, EventType.Public).Unwrap();
             cancelledEvent.ChangeEventStatusToCancelled();
 
             // Act
@@ -36,10 +42,12 @@ public class MakeEventPrivateTest
         public void ChangeEventType_ShouldUpdateType_WhenEventIsPublic()
         {
             // Arrange
-            var eventId = new EventId(Guid.NewGuid());
-            var eventWithPublicType = Event.CreateEvent(eventId).Unwrap();
+            var locationName = LocationName.Create("Meadows").Unwrap();
+            var locationCapacity = LocationCapacity.Create(20).Unwrap();
+            var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+            
+            var eventWithPublicType = Event.CreateEvent(location, EventType.Private).Unwrap();
             eventWithPublicType.ChangeEventStatusToReady();
-            eventWithPublicType.ChangeEventTypeToPublic();
 
             // Act
             var result = eventWithPublicType.ChangeEventTypeToPrivate();
@@ -54,8 +62,11 @@ public class MakeEventPrivateTest
         public void ChangeEventType_ShouldNotChangeType_WhenEventIsNotPublic()
         {
             // Arrange
-            var eventId = new EventId(Guid.NewGuid());
-            var eventWithPrivateType = Event.CreateEvent(eventId).Unwrap();
+            var locationName = LocationName.Create("Meadows").Unwrap();
+            var locationCapacity = LocationCapacity.Create(20).Unwrap();
+            var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+
+            var eventWithPrivateType = Event.CreateEvent(location, EventType.Private).Unwrap();
             eventWithPrivateType.ChangeEventStatusToReady();
 
             // Act
@@ -70,9 +81,16 @@ public class MakeEventPrivateTest
         public void ChangeEventType_ShouldReturnError_WhenEventStatusIsInvalidForChange()
         {
             // Arrange
-            var eventId = new EventId(Guid.NewGuid());
-            var eventWithInvalidType = Event.CreateEvent(eventId).Unwrap();
+            var locationName = LocationName.Create("Meadows").Unwrap();
+            var locationCapacity = LocationCapacity.Create(20).Unwrap();
+            var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+
+            var eventWithPrivateType = Event.CreateEvent(location, EventType.Private).Unwrap();
+            eventWithPrivateType.ChangeEventStatusToReady();
+
+            var eventWithInvalidType = Event.CreateEvent(location, EventType.Public).Unwrap();
             eventWithInvalidType.ChangeEventStatusToCancelled();
+            
 
             // Act
             var result = eventWithInvalidType.ChangeEventTypeToPrivate();

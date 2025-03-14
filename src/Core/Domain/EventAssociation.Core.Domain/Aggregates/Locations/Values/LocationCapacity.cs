@@ -12,7 +12,7 @@ public class LocationCapacity: ValueObject
         Value = value;
     }
 
-    public static Result<LocationCapacity> CreateLocationCapacity(int value)
+    public static Result<LocationCapacity> Create(int value)
     {
         var result = new LocationCapacity(value);
         return Result<LocationCapacity>.Ok(result);
