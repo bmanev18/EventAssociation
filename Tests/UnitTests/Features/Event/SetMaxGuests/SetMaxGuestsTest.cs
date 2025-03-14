@@ -12,17 +12,17 @@ public class SetMaxGuestsTest
     public void UpdateMaxNumberOfParticipants_ShouldFail_WhenExceedingLocationCapacity()
     {
         // Arrange
-        var locationCapacity = LocationCapacity.Create(50).Unwrap();
+        var locationCapacity = LocationCapacity.Create(40).Unwrap();
         var locationName = LocationName.Create("Meadows").Unwrap();
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
         var event_ = Event.CreateEvent(location, EventType.Private).Unwrap();
         
         // Act
-        var result = event_.UpdateMaxNumberOfParticipants(60);
+        var result = event_.UpdateMaxNumberOfParticipants(49);
         
         // Assert
         Assert.False(result.IsSuccess);
-        Assert.Equal("You cannot have more participants than the maximum capacity allowed by the location.", result.UnwrapErr().First().Message);
+        Assert.Equal("Cannot have more participants than the maximum capacity allowed by the location.", result.UnwrapErr().First().Message);
     }
 
     [Fact]
@@ -34,15 +34,15 @@ public class SetMaxGuestsTest
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
         var event_ = Event.CreateEvent(location, EventType.Private).Unwrap();
         
-        event_.UpdateMaxNumberOfParticipants(80);
+        event_.UpdateMaxNumberOfParticipants(30);
         event_.ChangeEventStatusToActive();
     
         // Act
-        var result = event_.UpdateMaxNumberOfParticipants(70);
+        var result = event_.UpdateMaxNumberOfParticipants(20);
     
         // Assert
         Assert.False(result.IsSuccess);
-        Assert.Equal("Cannot reduce the max participants for an active event, it can only be increased.", result.UnwrapErr().First().Message);
+        Assert.Equal("Cannot reduce the max participants for an active event, it can only be increased", result.UnwrapErr().First().Message);
     }
     
     [Fact]
@@ -58,7 +58,7 @@ public class SetMaxGuestsTest
         
         
         // Act
-        var result = event_.UpdateMaxNumberOfParticipants(90);
+        var result = event_.UpdateMaxNumberOfParticipants(40);
     
         // Assert
         Assert.False(result.IsSuccess);
@@ -75,7 +75,7 @@ public class SetMaxGuestsTest
         var event_ = Event.CreateEvent(location, EventType.Private).Unwrap();
     
         // Act
-        var result = event_.UpdateMaxNumberOfParticipants(80);
+        var result = event_.UpdateMaxNumberOfParticipants(40);
     
         // Assert
         Assert.True(result.IsSuccess);

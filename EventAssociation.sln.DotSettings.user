@@ -10,6 +10,9 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=11848d5a_002D5ada_002D4493_002D8b56_002D1cac4b14c4c7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EventTitle_DescriptionIsNull_WhenDescriptionIsTooLong" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\Ameya Mahankala\Documents\GitHub\EventAssociation" Presentation="&amp;lt;Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3089b4ed_002D2f80_002D4c5e_002D971e_002Db6079f6339c1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UpdateMaxNumberOfParticipants_ShouldFail_WhenReducingParticipantsForActiveEvent" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="/home/dzx/Documents/GitHub/EventAssociation/Tests/UnitTests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;UnitTests&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7fdab22a_002D9690_002D4f9b_002Db8c7_002D091e5e243678/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EventTitle_ShouldReturnError_WhenTitleIsEmpty" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Project Location="/home/dzx/Documents/GitHub/EventAssociation/Tests/UnitTests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;UnitTests&amp;gt;" /&gt;
 &lt;/SessionState&gt;</s:String>

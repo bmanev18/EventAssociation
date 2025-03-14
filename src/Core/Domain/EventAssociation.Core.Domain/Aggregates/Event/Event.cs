@@ -11,7 +11,7 @@ public class Event : AggregateRoot
     internal EventDescription Description { get; private set; }
     internal EventTime StartDate { get; }
     internal EventTime EndDate { get; }
-    internal EventMaxParticipants MaxParticipants { get; }
+    internal EventMaxParticipants MaxParticipants { get; private set; }
     internal EventType Type { get; private set; }
     internal EventStatus Status { get; private set; }
     
@@ -39,7 +39,7 @@ public class Event : AggregateRoot
         var id = new EventId(Guid.NewGuid());
         var eventTitle = EventTitle.CreateEventTitle("Working Title").Unwrap();
         var eventDescription = EventDescription.CreateEventDescription("").Unwrap();
-        var maxParticipants = new EventMaxParticipants(5);
+        var maxParticipants = EventMaxParticipants.Create(5).Unwrap();
         var eventStatus = EventStatus.Draft;
         var event_ = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus, location);
         return Result<Event>.Ok(event_);
@@ -91,6 +91,31 @@ public class Event : AggregateRoot
             default:
                 return Result<None>.Err(new Error("100", "Invalid Event Status"));
         }
+    }
+
+    public Result<None> UpdateMaxNumberOfParticipants(int maxParticipants)
+    {
+        if (Status == EventStatus.Active) {
+            if (maxParticipants < MaxParticipants.Value)
+            {
+                return Result<None>.Err(new Error("100",
+                    "Cannot reduce the max participants for an active event, it can only be increased"));
+            }
+        }
+
+        if (Status == EventStatus.Cancelled)
+        {
+            return Result<None>.Err(new Error("100",
+                "Cannot modify the max participants for a cancelled event"));
+        }
+
+        if (Location.LocationCapacity.Value < maxParticipants)
+        {
+            return Result<None>.Err(new Error(" ", "Cannot have more participants than the maximum capacity allowed by the location."));
+        }
+        var updatedMaxParticipants =EventMaxParticipants.Create(maxParticipants).Unwrap();
+        this.MaxParticipants = updatedMaxParticipants;
+        return Result<None>.Ok(None.Value); 
     }
 
     public Result<None> ChangeEventStatusToActive()
