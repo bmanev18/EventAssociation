@@ -8,7 +8,7 @@ public class Event : AggregateRoot
 {
     internal EventId Id { get; }
     internal EventTitle Title { get; private set; }
-    internal EventDescription Description { get; }
+    internal EventDescription Description { get; private set; }
     internal EventTime StartDate { get; }
     internal EventTime EndDate { get; }
     internal EventMaxParticipants MaxParticipants { get; }
@@ -38,7 +38,7 @@ public class Event : AggregateRoot
     {
         var id = new EventId(Guid.NewGuid());
         var eventTitle = EventTitle.CreateEventTitle("Working Title").Unwrap();
-        var eventDescription = new EventDescription("");
+        var eventDescription = EventDescription.CreateEventDescription("").Unwrap();
         var maxParticipants = new EventMaxParticipants(5);
         var eventStatus = EventStatus.Draft;
         var event_ = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus, location);
@@ -64,6 +64,30 @@ public class Event : AggregateRoot
             case EventStatus.Draft:
                 this.Title = title;
                 return Result<None>.Ok(None.Value);
+            default:
+                return Result<None>.Err(new Error("100", "Invalid Event Status"));
+        }
+    }
+
+    public Result<None> ChangeDescription(EventDescription description)
+    {
+        switch (this.Status)
+        {
+            case EventStatus.Active:
+                return Result<None>.Err(new Error("100", "Cannot update the description of an already active event"));
+            
+            case EventStatus.Cancelled:
+                return Result<None>.Err(new Error("100", "Cannot update the description of a cancelled event"));
+            
+            case EventStatus.Ready:
+                this.Description = description;
+                this.Status = EventStatus.Draft;
+                return Result<None>.Ok(None.Value);
+            
+            case EventStatus.Draft:
+                this.Description = description;
+                return Result<None>.Ok(None.Value);
+            
             default:
                 return Result<None>.Err(new Error("100", "Invalid Event Status"));
         }

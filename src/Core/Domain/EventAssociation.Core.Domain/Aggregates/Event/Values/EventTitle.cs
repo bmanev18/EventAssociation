@@ -5,7 +5,7 @@ namespace EventAssociation.Core.Domain.Aggregates.Events.Values;
 
 public class EventTitle: ValueObject
 {
-    public string Title { get; }
+    internal string Title { get; }
     
     private EventTitle(string title)
     {
