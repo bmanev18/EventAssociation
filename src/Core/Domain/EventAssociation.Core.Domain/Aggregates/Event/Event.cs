@@ -11,7 +11,7 @@ public class Event : AggregateRoot
     internal EventDescription Description { get; }
     internal EventTime StartDate { get; }
     internal EventTime EndDate { get; }
-    internal EventMaxParticipants MaxParticipants { get; }
+    internal EventMaxParticipants MaxParticipants { get; private set; }
     internal EventType Type { get; private set; }
     internal EventStatus Status { get; private set; }
     
@@ -39,7 +39,7 @@ public class Event : AggregateRoot
         var id = new EventId(Guid.NewGuid());
         var eventTitle = EventTitle.CreateEventTitle("Working Title").Unwrap();
         var eventDescription = new EventDescription("");
-        var maxParticipants = new EventMaxParticipants(5);
+        var maxParticipants = EventMaxParticipants.Create(5).Unwrap();
         var eventStatus = EventStatus.Draft;
         var event_ = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus, location);
         return Result<Event>.Ok(event_);
@@ -106,18 +106,42 @@ public class Event : AggregateRoot
 
     public Result<None> ChangeEventTypeToPrivate()
     {
-        if (this.Status == EventStatus.Active || this.Status == EventStatus.Cancelled)
+        if (Status == EventStatus.Active || Status == EventStatus.Cancelled)
         {
             return Result<None>.Err(new Error("100", "Cannot change the event type of an active or cancelled event"));
         } 
 
-        if (this.Type == EventType.Public)
+        if (Type == EventType.Public)
         {
-            this.Type = EventType.Private;
+            Type = EventType.Private;
             ChangeEventStatusToDraft();
             return Result<None>.Ok(None.Value);
         }
 
+        return Result<None>.Ok(None.Value);
+    }
+
+    public Result<None> UpdateMaxNumberOfParticipants(int value)
+    {
+        
+        if (Status == EventStatus.Active) {
+            if (value < this.MaxParticipants.Value) {
+                return Result<None>.Err(new Error("", "Cannot reduce the max participants for an active event, it can only be increased."));
+            }
+        }
+        if (Status == EventStatus.Cancelled)
+        {
+            return Result<None>.Err(new Error("", "Cannot modify the max participants for a cancelled event"));
+        }
+        
+        if (Location.LocationCapacity.Value < value)
+        {
+            return Result<None>.Err(new Error("", "You cannot have more participants than the maximum capacity allowed by the location."));
+
+        }
+        
+        var update = EventMaxParticipants.Create(value);
+        MaxParticipants = update.Unwrap();
         return Result<None>.Ok(None.Value);
     }
 }

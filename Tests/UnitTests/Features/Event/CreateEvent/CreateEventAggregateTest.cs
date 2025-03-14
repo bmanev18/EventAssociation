@@ -41,7 +41,7 @@ public class CreateEventAggregateTest
         // Assert
         Assert.Equal(EventTitle.CreateEventTitle("Working Title").Unwrap(),createdEvent.Title);
         Assert.Equal(new EventDescription(""), createdEvent.Description);
-        Assert.Equal(new EventMaxParticipants(5), createdEvent.MaxParticipants);
+        Assert.Equal(EventMaxParticipants.Create(5).Unwrap(), createdEvent.MaxParticipants);
         Assert.Equal(EventType.Private, createdEvent.Type);
         Assert.Equal(EventStatus.Draft, createdEvent.Status);
     }

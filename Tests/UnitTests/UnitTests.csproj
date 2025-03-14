@@ -23,7 +23,6 @@
     <ItemGroup>
       <Folder Include="Features\Event\Activate\" />
       <Folder Include="Features\Event\Ready\" />
-      <Folder Include="Features\Event\SetMaxGuests\" />
       <Folder Include="Features\Event\UpdateDescription\" />
       <Folder Include="Features\Event\UpdateTimeRange\" />
       <Folder Include="Features\Guest\AcceptInvitation\" />
