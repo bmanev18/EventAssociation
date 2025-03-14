@@ -7,6 +7,9 @@
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.EventTitleTests.EventTitle_ShouldReturnSuccessResult_WhenTitleIsValid&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=11848d5a_002D5ada_002D4493_002D8b56_002D1cac4b14c4c7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EventTitle_DescriptionIsNull_WhenDescriptionIsTooLong" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\Ameya Mahankala\Documents\GitHub\EventAssociation" Presentation="&amp;lt;Tests&amp;gt;" /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7fdab22a_002D9690_002D4f9b_002Db8c7_002D091e5e243678/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EventTitle_ShouldReturnError_WhenTitleIsEmpty" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Project Location="/home/dzx/Documents/GitHub/EventAssociation/Tests/UnitTests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;UnitTests&amp;gt;" /&gt;
 &lt;/SessionState&gt;</s:String>
@@ -26,9 +29,6 @@
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.EventTitleTests.EventTitle_ShouldReturnSuccessResult_WhenTitleIsValid&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f2da4fa4_002D2304_002D48ea_002Dac76_002Db699a9b69536/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UnitTest1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.CreateEventAggregateTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.EventTitleTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f2da4fa4_002D2304_002D48ea_002Dac76_002Db699a9b69536/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UnitTest1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\Ameya Mahankala\Documents\GitHub\EventAssociation" Presentation="&amp;lt;Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
