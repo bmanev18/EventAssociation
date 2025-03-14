@@ -12,14 +12,14 @@
   - [x] S4
       
 - Use Case 2: The creator updates the title of an existing event
-  - [ ] S1
-  - [ ] S2
-  - [ ] F1 - Title is empty
-  - [ ] F2 - Title is too short
-  - [ ] F3 - Title is too long
-  - [ ] F4 - Title is empty
-  - [ ] F5 - Event is active
-  - [ ] F6 - event is cancelled
+  - [x] S1
+  - [x]S2
+  - [x] F1 - Title is empty
+  - [x] F2 - Title is too short
+  - [x] F3 - Title is too long
+  - [x] F4 - Title is empty
+  - [x] F5 - Event is active
+  - [x] F6 - event is cancelled
       
 - Use Case 3: The creator updates the description of an event
   - [ ] S1
