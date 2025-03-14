@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using EventAssociation.Core.Domain.Aggregates.Events.Values;
 using EventAssociation.Core.Tools.OperationResult;
 
 Console.WriteLine("Hello, World!");
@@ -17,5 +18,8 @@ Console.WriteLine(errorResult.UnwrapErr().Count); // 2
 
 
 var  noneResult = Result<None>.Ok(None.Value);
+
+var title1 = new EventTitle("Valid Event Title");
+Console.WriteLine(title1.Title);
 Console.WriteLine(success.IsSuccess); // true
 

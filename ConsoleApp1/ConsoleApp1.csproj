@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\src\Core\Domain\EventAssociation.Core.Domain\EventAssociation.Core.Domain.csproj" />
       <ProjectReference Include="..\src\Core\Tools\EventAssociation.Core.Tools.OperationResult\EventAssociation.Core.Tools.OperationResult.csproj" />
     </ItemGroup>
 
