@@ -6,10 +6,10 @@
   - [x] Aggregate Base Classes
         
 - Use Case 1: Event creator creates new event.
-  - [ ] S1
-  - [ ] S2
-  - [ ] S3
-  - [ ] S4
+  - [x] S1
+  - [x] S2
+  - [x] S3
+  - [x] S4
       
 - Use Case 2: The creator updates the title of an existing event
   - [ ] S1
