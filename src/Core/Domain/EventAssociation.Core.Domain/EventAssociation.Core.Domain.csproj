@@ -7,11 +7,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Aggregates\Events\Bases\" />
+      <Folder Include="Aggregates\Event\Bases\" />
       <Folder Include="Aggregates\Guests\Bases\" />
       <Folder Include="Aggregates\Guests\Values\" />
       <Folder Include="Aggregates\Locations\Bases\" />
       <Folder Include="Common\Values\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Tools\EventAssociation.Core.Tools.OperationResult\EventAssociation.Core.Tools.OperationResult.csproj" />
     </ItemGroup>
 
 </Project>

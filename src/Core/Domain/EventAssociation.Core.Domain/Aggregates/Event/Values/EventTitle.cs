@@ -2,14 +2,15 @@
 
 namespace EventAssociation.Core.Domain.Aggregates.Events.Values;
 
-public class Maxparticipants: ValueObject
+public class EventTitle: ValueObject
 {
-    public Maxparticipants(int value)
+    private string Value { get; }
+    
+    public EventTitle(string value)
     {
         Value = value;
     }
 
-    private int Value { get;}
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;
