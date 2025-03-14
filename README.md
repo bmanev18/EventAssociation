@@ -48,14 +48,14 @@
   - [ ] F11 - Event durations spans invalid time.
         
 - Use Case 5: The creator makes the event public
-  - [ ] S1
-  - [ ] F2 - Event is cancelled
+  - [x] S1
+  - [x] F2 - Event is cancelled
     
 - Use Case 6: The creator makes the event private
-  - [ ] S1
-  - [ ] S2
-  - [ ] F1 - Event is active.
-  - [ ] F2 - Event is cancelled
+  - [x] S1
+  - [x] S2
+  - [x] F1 - Event is active.
+  - [x] F2 - Event is cancelled
       
 - Use Case 7: The creator sets maximum number of guests
   - [ ] S1
