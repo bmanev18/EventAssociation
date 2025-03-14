@@ -32,7 +32,7 @@ internal EventId Id { get; }
 
     public static Result<Event> CreateEvent(EventId id)
     {
-        var eventTitle = new EventTitle("Working Title");
+        var eventTitle = EventTitle.CreateEventTitle("Working Title").Unwrap();
         var eventDescription = new EventDescription("");
         var maxParticipants = new EventMaxParticipants(5);
         var eventType = EventType.Private;
