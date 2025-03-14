@@ -174,6 +174,27 @@ public class Event : AggregateRoot
 
         return Result<None>.Ok(None.Value);
     }
+    
+    public Result<None> ChangeTimes(EventTime startTime, EventTime endTime)
+    {
+        if (Status == EventStatus.Active)
+        {
+            return Result<None>.Err(new Error("Code", "Active events cannot be edited"));
+        }
+
+        var valid = ValidateTimes(startTime, endTime);
+        if (!valid.IsSuccess)
+        {
+            return valid;
+        }
+
+        if (Status == EventStatus.Ready)
+        {
+            ChangeEventStatusToDraft();
+        }
+
+        return Result<None>.Ok(None.Value);
+    }
 
     private Result<None> ValidateTimes(EventTime startTime, EventTime endTime)
     {
@@ -197,11 +218,11 @@ public class Event : AggregateRoot
 
         if (startTime.isTheSameDayAs(endTime).IsSuccess)
         {
-            return ValidateTimesInSameDate(endTime);
+            return endTime.Before12AM();
         }
         else if (endTime.IsNextDayFrom(startTime).IsSuccess)
         {
-            return ValidateTimesInConsecutiveDays(endTime);
+            return endTime.Before1Am();
         }
         else
         {
@@ -211,11 +232,6 @@ public class Event : AggregateRoot
 
     private Result<None> ValidateTimesInSameDate(EventTime endTime)
     {
-        return endTime.Before2359();
-    }
-
-    private Result<None> ValidateTimesInConsecutiveDays(EventTime endTime)
-    {
-        return endTime.Before1Am();
+        return endTime.Before12AM();
     }
 }

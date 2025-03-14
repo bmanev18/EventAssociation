@@ -47,7 +47,7 @@ public class EventTime: ValueObject
             : Result<None>.Err(new Error("BEFORE_EIGHT", "Time is before 8 AM"));
     }
 
-    public Result<None> Before2359()
+    public Result<None> Before12AM()
     {
         return Value.Hour < 23 || (Value.Hour == 23 && Value.Minute == 0) 
             ? Result<None>.Ok(None.Value) 
