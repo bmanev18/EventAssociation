@@ -13,7 +13,7 @@
       
 - Use Case 2: The creator updates the title of an existing event
   - [x] S1
-  - [x]S2
+  - [x] S2
   - [x] F1 - Title is empty
   - [x] F2 - Title is too short
   - [x] F3 - Title is too long
