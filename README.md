@@ -58,14 +58,14 @@
   - [x] F2 - Event is cancelled
       
 - Use Case 7: The creator sets maximum number of guests
-  - [ ] S1
-  - [ ] S2
-  - [ ] S3
-  - [ ] F1 - Event is active
-  - [ ] F2 - Event is cancelled
-  - [ ] F3 - Gust number higher than location's max number
-  - [ ] F4 - Guest number too small
-  - [ ] F5 - Guest number exceeds maximum
+  - [x] S1
+  - [x] S2
+  - [x] S3
+  - [x] F1 - Event is active
+  - [x] F2 - Event is cancelled
+  - [x] F3 - Gust number higher than location's max number
+  - [x] F4 - Guest number too small
+  - [x] F5 - Guest number exceeds maximum
       
 - Use Case 8: The creator readies an event
   - [ ] S1
