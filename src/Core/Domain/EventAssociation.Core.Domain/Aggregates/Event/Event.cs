@@ -1,4 +1,5 @@
 using EventAssociation.Core.Domain.Aggregates.Events.Values;
+using EventAssociation.Core.Domain.Aggregates.Locations;
 using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Domain.Aggregates.Event;
@@ -13,12 +14,14 @@ public class Event : AggregateRoot
     internal EventMaxParticipants MaxParticipants { get; }
     internal EventType Type { get; private set; }
     internal EventStatus Status { get; private set; }
+    
+    internal Location Location { get; private set; }
 
 
     // private GuestList guestList;
 
     private Event(EventId id, EventTitle title, EventDescription description, EventTime startDate, EventTime endDate,
-        EventMaxParticipants maxParticipants, EventType type, EventStatus status)
+        EventMaxParticipants maxParticipants, EventType type, EventStatus status, Location location)
     {
         this.Id = id;
         this.Title = title;
@@ -28,16 +31,17 @@ public class Event : AggregateRoot
         this.MaxParticipants = maxParticipants;
         this.Type = type;
         this.Status = status;
+        this.Location = location;
     }
 
-    public static Result<Event> CreateEvent(EventId id)
+    public static Result<Event> CreateEvent(Location location, EventType eventType)
     {
+        var id = new EventId(Guid.NewGuid());
         var eventTitle = EventTitle.CreateEventTitle("Working Title").Unwrap();
         var eventDescription = new EventDescription("");
         var maxParticipants = new EventMaxParticipants(5);
-        var eventType = EventType.Private;
         var eventStatus = EventStatus.Draft;
-        var event_ = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus);
+        var event_ = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus, location);
         return Result<Event>.Ok(event_);
     }
 
