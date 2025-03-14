@@ -8,25 +8,17 @@
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7fdab22a_002D9690_002D4f9b_002Db8c7_002D091e5e243678/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EventTitle_ShouldReturnError_WhenTitleIsEmpty" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.EventTitleTests&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.CreateEventAggregateTest.ChangeTitle_ShouldReturnError_WhenEventIsActive&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.CreateEventAggregateTest.ChangeTitle_ShouldReturnError_WhenEventIsCancelled&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.CreateEventAggregateTest.ChangeTitle_ShouldUpdateTitle_WhenEventIsReady&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.CreateEventAggregateTest.ChangeTitle_ShouldUpdateTitle_WhenEventIsDraft&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.MakePublic.MakeEventPublicTest.ChangeEventTypeToPublic_ShouldReturnError_WhenEventIsCancelled&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.MakePublic.MakeEventPublicTest.ChangeEventTypeToPublic_ShouldUpdateType_WhenEventIsNotCancelled&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.MakePublic.MakeEventPublicTest.ChangeEventTypeToPublic_ShouldUpdateType_WhenEventIsSetToDraft&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.MakePrivate.MakeEventPrivateTest.ChangeEventType_ShouldReturnError_WhenEventIsActiveOrCancelled&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.MakePrivate.MakeEventPrivateTest.ChangeEventType_ShouldUpdateType_WhenEventIsPublic&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.MakePrivate.MakeEventPrivateTest.ChangeEventType_ShouldNotChangeType_WhenEventIsNotPublic&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.MakePrivate.MakeEventPrivateTest.ChangeEventType_ShouldReturnError_WhenEventStatusIsInvalidForChange&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+  &lt;Project Location="/home/dzx/Documents/GitHub/EventAssociation/Tests/UnitTests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;UnitTests&amp;gt;" /&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a742bce6_002D84a5_002D47f6_002D92a3_002D89bba3aa16d6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EventTitle_ShouldReturnSuccessResult_WhenTitleIsValid #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.EventTitleTests.EventTitle_ShouldReturnSuccessResult_WhenTitleIsValid&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.EventTitleTests.EventTitle_ShouldReturnError_WhenTitleIsEmpty&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e8dca0e4_002Ddfbb_002D4542_002D8d34_002Db93da021d6b3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateEvent_ShouldReturnSuccessResult" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.CreateEvent.CreateEventAggregateTest.CreateEvent_ShouldReturnSuccessResult&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f243a9f2_002Dda87_002D47c1_002Da587_002D1663a8ebae43/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EventTitle_ShouldReturnSuccessResult_WhenTitleIsValid #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;

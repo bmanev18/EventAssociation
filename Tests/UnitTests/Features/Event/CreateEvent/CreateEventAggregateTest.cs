@@ -1,4 +1,7 @@
-﻿namespace UnitTests.Features.Event.CreateEvent;
+﻿using EventAssociation.Core.Domain.Aggregates.Locations;
+using EventAssociation.Core.Domain.Aggregates.Locations.Values;
+
+namespace UnitTests.Features.Event.CreateEvent;
 using Xunit;
 using EventAssociation.Core.Domain.Aggregates.Event;
 using EventAssociation.Core.Domain.Aggregates.Events.Values;
@@ -10,10 +13,13 @@ public class CreateEventAggregateTest
     public void CreateEvent_ShouldReturnSuccessResult()
     {
         // Arrange
-        var eventId = new EventId(Guid.NewGuid());
+        var locationName = LocationName.Create("Meadows").Unwrap();
+        var locationCapacity = LocationCapacity.Create(20).Unwrap();
+
+        var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
 
         // Act
-        var result = Event.CreateEvent(eventId);
+        var result = Event.CreateEvent(location, EventType.Private);
         
         // Assert
         Assert.True(result.IsSuccess);
@@ -24,14 +30,15 @@ public class CreateEventAggregateTest
     public void CreateEvent_ShouldInitializeFieldsCorrectly()
     {
         // Arrange
-        var eventId = new EventId(Guid.NewGuid());
+        var locationName = LocationName.Create("Meadows").Unwrap();
+        var locationCapacity = LocationCapacity.Create(20).Unwrap();
+
+        var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
 
         // Act
-        var result = Event.CreateEvent(eventId);
-        var createdEvent = result.Unwrap();
+        var createdEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
 
         // Assert
-        Assert.Equal(eventId, createdEvent.Id);
         Assert.Equal(EventTitle.CreateEventTitle("Working Title").Unwrap(),createdEvent.Title);
         Assert.Equal(new EventDescription(""), createdEvent.Description);
         Assert.Equal(new EventMaxParticipants(5), createdEvent.MaxParticipants);
@@ -42,4 +49,4 @@ public class CreateEventAggregateTest
 
      
     
-    }
+}

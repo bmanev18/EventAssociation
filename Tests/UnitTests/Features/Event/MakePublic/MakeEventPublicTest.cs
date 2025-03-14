@@ -1,4 +1,6 @@
 using EventAssociation.Core.Domain.Aggregates.Events.Values;
+using EventAssociation.Core.Domain.Aggregates.Locations;
+using EventAssociation.Core.Domain.Aggregates.Locations.Values;
 
 namespace UnitTests.Features.Event.MakePublic;
 using EventAssociation.Core.Domain.Aggregates.Event;
@@ -10,8 +12,11 @@ public class MakeEventPublicTest
     public void ChangeEventTypeToPublic_ShouldReturnError_WhenEventIsCancelled()
     {
         // Arrange
-        var eventId = new EventId(Guid.NewGuid());
-        var cancelledEvent = Event.CreateEvent(eventId).Unwrap();
+        var locationName = LocationName.Create("Meadows").Unwrap();
+        var locationCapacity = LocationCapacity.Create(20).Unwrap();
+        var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+            
+        var cancelledEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
         cancelledEvent.ChangeEventStatusToCancelled();
 
         // Act
@@ -26,24 +31,30 @@ public class MakeEventPublicTest
     public void ChangeEventTypeToPublic_ShouldUpdateType_WhenEventIsNotCancelled()
     {
         // Arrange
-        var eventId = new EventId(Guid.NewGuid());
-        var activeEvent = Event.CreateEvent(eventId).Unwrap();
-        activeEvent.ChangeEventStatusToReady();
+        var locationName = LocationName.Create("Meadows").Unwrap();
+        var locationCapacity = LocationCapacity.Create(20).Unwrap();
+        var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+            
+        var readyEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
+        readyEvent.ChangeEventStatusToReady();
         
         // Act
-        var result = activeEvent.ChangeEventTypeToPublic();
+        var result = readyEvent.ChangeEventTypeToPublic();
 
         // Assert
         Assert.True(result.IsSuccess);
-        Assert.Equal(EventType.Public, activeEvent.Type);
+        Assert.Equal(EventType.Public, readyEvent.Type);
     }
     
     [Fact]
     public void ChangeEventTypeToPublic_ShouldUpdateType_WhenEventIsSetToDraft()
     {
         // Arrange
-        var eventId = new EventId(Guid.NewGuid());
-        var draftEvent = Event.CreateEvent(eventId).Unwrap();
+        var locationName = LocationName.Create("Meadows").Unwrap();
+        var locationCapacity = LocationCapacity.Create(20).Unwrap();
+        var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+            
+        var draftEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
         
         // Act
         var result = draftEvent.ChangeEventTypeToPublic();
@@ -57,14 +68,18 @@ public class MakeEventPublicTest
     public void ChangeEventTypeToPublic_ShouldUpdateType_WhenEventIsSetToActive()
     {
         // Arrange
-        var eventId = new EventId(Guid.NewGuid());
-        var draftEvent = Event.CreateEvent(eventId).Unwrap();
+        var locationName = LocationName.Create("Meadows").Unwrap();
+        var locationCapacity = LocationCapacity.Create(20).Unwrap();
+        var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+            
+        var activeEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
+        activeEvent.ChangeEventStatusToActive();
         
         // Act
-        var result = draftEvent.ChangeEventTypeToPublic();
+        var result = activeEvent.ChangeEventTypeToPublic();
 
         // Assert
         Assert.True(result.IsSuccess);
-        Assert.Equal(EventType.Public, draftEvent.Type);
+        Assert.Equal(EventType.Public, activeEvent.Type);
     }
 }

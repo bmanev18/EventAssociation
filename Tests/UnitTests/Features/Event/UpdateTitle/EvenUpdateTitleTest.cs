@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using EventAssociation.Core.Domain.Aggregates.Locations;
+using EventAssociation.Core.Domain.Aggregates.Locations.Values;
 
 namespace UnitTests.Features.Event.CreateEvent
 {
@@ -13,8 +15,11 @@ namespace UnitTests.Features.Event.CreateEvent
         public void ChangeTitle_ShouldReturnError_WhenEventIsActive()
         {
             // Arrange
-            var eventId = new EventId(Guid.NewGuid());
-            var activeEvent = Event.CreateEvent(eventId).Unwrap();
+            var locationName = LocationName.Create("Meadows").Unwrap();
+            var locationCapacity = LocationCapacity.Create(20).Unwrap();
+            var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+            
+            var activeEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
             activeEvent.ChangeEventStatusToActive();
             var newTitle = EventTitle.CreateEventTitle("New Event Title");
         
@@ -29,8 +34,10 @@ namespace UnitTests.Features.Event.CreateEvent
         public void ChangeTitle_ShouldReturnError_WhenEventIsCancelled()
         {
             // Arrange
-            var eventId = new EventId(Guid.NewGuid());
-            var cancelledEvent = Event.CreateEvent(eventId).Unwrap();
+            var locationName = LocationName.Create("Meadows").Unwrap();
+            var locationCapacity = LocationCapacity.Create(20).Unwrap();
+            var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+            var cancelledEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
             cancelledEvent.ChangeEventStatusToCancelled();
             var newTitle = EventTitle.CreateEventTitle("New Event Title");
         
@@ -46,8 +53,10 @@ namespace UnitTests.Features.Event.CreateEvent
         public void ChangeTitle_ShouldUpdateTitle_WhenEventIsReady()
         {
             // Arrange
-            var eventId = new EventId(Guid.NewGuid());
-            var readyEvent = Event.CreateEvent(eventId).Unwrap();
+            var locationName = LocationName.Create("Meadows").Unwrap();
+            var locationCapacity = LocationCapacity.Create(20).Unwrap();
+            var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+            var readyEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
             readyEvent.ChangeEventStatusToReady();
             var newTitle = EventTitle.CreateEventTitle("New Event Title");
         
@@ -64,8 +73,11 @@ namespace UnitTests.Features.Event.CreateEvent
         public void ChangeTitle_ShouldUpdateTitle_WhenEventIsDraft()
         {
             // Arrange
-            var eventId = new EventId(Guid.NewGuid());
-            var draftEvent = Event.CreateEvent(eventId).Unwrap();
+            
+            var locationName = LocationName.Create("Meadows").Unwrap();
+            var locationCapacity = LocationCapacity.Create(20).Unwrap();
+            var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+            var draftEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
             draftEvent.ChangeEventStatusToDraft();
             var newTitle = EventTitle.CreateEventTitle("New Event Title");
         
