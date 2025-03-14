@@ -22,12 +22,12 @@
   - [x] F6 - event is cancelled
       
 - Use Case 3: The creator updates the description of an event
-  - [ ] S1
-  - [ ] S2
-  - [ ] S3
-  - [ ] F1 - Description is too long
-  - [ ] F2 - Event is cancelled
-  - [ ] F3 - Event is active
+  - [x] S1
+  - [x] S2
+  - [x] S3
+  - [x] F1 - Description is too long
+  - [x] F2 - Event is cancelled
+  - [x] F3 - Event is active
     
 - Use Case 4: The creator updates the start and end time of the event
   - [ ] S1
