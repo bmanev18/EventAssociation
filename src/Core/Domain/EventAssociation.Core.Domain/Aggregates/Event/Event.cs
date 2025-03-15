@@ -174,12 +174,12 @@ public class Event : AggregateRoot
 
         return Result<None>.Ok(None.Value);
     }
-    
+
     public Result<None> ChangeTimes(EventTime startTime, EventTime endTime)
     {
-        if (Status == EventStatus.Active)
+        if (Status == EventStatus.Active || Status == EventStatus.Cancelled)
         {
-            return Result<None>.Err(new Error("Code", "Active events cannot be edited"));
+            return Result<None>.Err(new Error("Code", "Active or Canceled events cannot be edited"));
         }
 
         var valid = ValidateTimes(startTime, endTime);
@@ -228,10 +228,5 @@ public class Event : AggregateRoot
         {
             return Result<None>.Err(new Error("100", "End time is more than one day after Start time"));
         }
-    }
-
-    private Result<None> ValidateTimesInSameDate(EventTime endTime)
-    {
-        return endTime.Before12AM();
     }
 }
