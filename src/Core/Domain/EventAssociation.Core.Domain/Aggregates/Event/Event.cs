@@ -1,3 +1,4 @@
+using EventAssociation.Core.Domain.Aggregates.Event.Values;
 using EventAssociation.Core.Domain.Aggregates.Events.Values;
 using EventAssociation.Core.Domain.Aggregates.Locations;
 using EventAssociation.Core.Tools.OperationResult;
@@ -14,7 +15,7 @@ public class Event : AggregateRoot
     internal EventMaxParticipants MaxParticipants { get; private set; }
     internal EventType Type { get; private set; }
     internal EventStatus Status { get; private set; }
-    
+
     internal Location Location { get; private set; }
 
 
@@ -41,7 +42,8 @@ public class Event : AggregateRoot
         var eventDescription = EventDescription.CreateEventDescription("").Unwrap();
         var maxParticipants = EventMaxParticipants.Create(5).Unwrap();
         var eventStatus = EventStatus.Draft;
-        var event_ = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus, location);
+        var event_ = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus,
+            location);
         return Result<Event>.Ok(event_);
     }
 
@@ -75,19 +77,19 @@ public class Event : AggregateRoot
         {
             case EventStatus.Active:
                 return Result<None>.Err(new Error("100", "Cannot update the description of an already active event"));
-            
+
             case EventStatus.Cancelled:
                 return Result<None>.Err(new Error("100", "Cannot update the description of a cancelled event"));
-            
+
             case EventStatus.Ready:
                 this.Description = description;
                 this.Status = EventStatus.Draft;
                 return Result<None>.Ok(None.Value);
-            
+
             case EventStatus.Draft:
                 this.Description = description;
                 return Result<None>.Ok(None.Value);
-            
+
             default:
                 return Result<None>.Err(new Error("100", "Invalid Event Status"));
         }
@@ -95,7 +97,8 @@ public class Event : AggregateRoot
 
     public Result<None> UpdateMaxNumberOfParticipants(int maxParticipants)
     {
-        if (Status == EventStatus.Active) {
+        if (Status == EventStatus.Active)
+        {
             if (maxParticipants < MaxParticipants.Value)
             {
                 return Result<None>.Err(new Error("100",
@@ -111,11 +114,13 @@ public class Event : AggregateRoot
 
         if (Location.LocationCapacity.Value < maxParticipants)
         {
-            return Result<None>.Err(new Error(" ", "Cannot have more participants than the maximum capacity allowed by the location."));
+            return Result<None>.Err(new Error(" ",
+                "Cannot have more participants than the maximum capacity allowed by the location."));
         }
-        var updatedMaxParticipants =EventMaxParticipants.Create(maxParticipants).Unwrap();
+
+        var updatedMaxParticipants = EventMaxParticipants.Create(maxParticipants).Unwrap();
         this.MaxParticipants = updatedMaxParticipants;
-        return Result<None>.Ok(None.Value); 
+        return Result<None>.Ok(None.Value);
     }
 
     public Result<None> ChangeEventStatusToActive()
@@ -158,7 +163,7 @@ public class Event : AggregateRoot
         if (this.Status == EventStatus.Active || this.Status == EventStatus.Cancelled)
         {
             return Result<None>.Err(new Error("100", "Cannot change the event type of an active or cancelled event"));
-        } 
+        }
 
         if (this.Type == EventType.Public)
         {
@@ -168,5 +173,65 @@ public class Event : AggregateRoot
         }
 
         return Result<None>.Ok(None.Value);
+    }
+    
+    public Result<None> ChangeTimes(EventTime startTime, EventTime endTime)
+    {
+        if (Status == EventStatus.Active)
+        {
+            return Result<None>.Err(new Error("Code", "Active events cannot be edited"));
+        }
+
+        var valid = ValidateTimes(startTime, endTime);
+        if (!valid.IsSuccess)
+        {
+            return valid;
+        }
+
+        if (Status == EventStatus.Ready)
+        {
+            ChangeEventStatusToDraft();
+        }
+
+        return Result<None>.Ok(None.Value);
+    }
+
+    private Result<None> ValidateTimes(EventTime startTime, EventTime endTime)
+    {
+        if (!startTime.IsBefore(endTime).IsSuccess)
+        {
+            return Result<None>.Err(new Error("100", "Start time is not before end time"));
+        }
+
+        var results = new List<Result<None>>
+        {
+            endTime.AtLeastOneHourSince(startTime),
+            endTime.IntervalLessThan10Hours(startTime),
+            startTime.After8()
+        };
+
+        var preprocess = Result<None>.AssertResponses(results);
+        if (!preprocess.IsSuccess)
+        {
+            return preprocess;
+        }
+
+        if (startTime.isTheSameDayAs(endTime).IsSuccess)
+        {
+            return endTime.Before12AM();
+        }
+        else if (endTime.IsNextDayFrom(startTime).IsSuccess)
+        {
+            return endTime.Before1Am();
+        }
+        else
+        {
+            return Result<None>.Err(new Error("100", "End time is more than one day after Start time"));
+        }
+    }
+
+    private Result<None> ValidateTimesInSameDate(EventTime endTime)
+    {
+        return endTime.Before12AM();
     }
 }
