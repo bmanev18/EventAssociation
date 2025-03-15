@@ -125,6 +125,14 @@ public class Event : AggregateRoot
 
     public Result<None> ChangeEventStatusToActive()
     {
+        // ChangeEventStatusToReady will check for invalid fields and also make sure the status is Ready
+        // F1 + F2
+        var eventIsReady = ChangeEventStatusToReady();
+        if (!eventIsReady.IsSuccess)
+        {
+            return eventIsReady;
+        }
+        
         this.Status = EventStatus.Active;
         return Result<None>.Ok(None.Value);
     }
@@ -143,19 +151,29 @@ public class Event : AggregateRoot
 
     public Result<None> ChangeEventStatusToReady()
     {
+        // F1 + F2
         if (Status != EventStatus.Draft)
         {
             return Result<None>.Err(new Error("100", "Cannot change the status of an event, which is not in draft"));
         }
 
         var results = new List<Result<None>>();
+        // F4
         if (Title.IsEmptyOrDefualt())
         {
             results.Add(Result<None>.Err(new Error("100", "Title cannot be empty or kept default")));
         }
+        // F1 time checks
         else if (StartDate == null || EndDate == null)
         {
             results.Add(Result<None>.Err(new Error("100", "Start and end dates are required")));
+        }
+        
+        // F3
+        var isEventInTheFuture = StartDate.LaterThanNow();
+        if (!isEventInTheFuture.IsSuccess)
+        {
+            return isEventInTheFuture;
         }
 
         // TODO add additional checks:
