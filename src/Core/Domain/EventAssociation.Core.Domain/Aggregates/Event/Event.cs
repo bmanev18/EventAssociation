@@ -279,6 +279,12 @@ public class Event : AggregateRoot
 
     public Result<None> RegisterGuest(Guest guest)
     {
+        var isEventInTheFuture = StartDate.LaterThanNow();
+        if (!isEventInTheFuture.IsSuccess)
+        {
+            return Result<None>.Err(new Error("100", "Cannot join an event that has already started."));
+        }
+        
         if (Status != EventStatus.Active)
         {
             return Result<None>.Err(new Error("100", "Cannot register an inactive event"));
@@ -286,7 +292,7 @@ public class Event : AggregateRoot
         
         if (Type != EventType.Public)
         {
-            return Result<None>.Err(new Error("100", "You cannot register as a guest in a private event"));
+            return Result<None>.Err(new Error("100", "You cannot join a private event. Only public events can be joined."));
         }
 
         if (guestList.GetTotalGuests() >= MaxParticipants.Value)
@@ -294,18 +300,14 @@ public class Event : AggregateRoot
             return Result<None>.Err(new Error("100", "There are no available spots in the guest list"));
         }
         
-        var isEventInTheFuture = StartDate.LaterThanNow();
-        if (!isEventInTheFuture.IsSuccess)
+        if (guestList.IsGuestAlreadyInList(guest))
         {
-            return Result<None>.Err(new Error("100", "Cannot join an event that has already started."));
-        }
-
-        if (guestList.IsGuestAlreadyInList(guest).IsSuccess)
-        {
-            return Result<None>.Err(new Error("100", "You are already registered to attend this event"));
+            return Result<None>.Err(new Error("100", "You are already registered to attend this event."));
         }
 
         guestList.AddGuest(guest);
         return Result<None>.Ok(None.Value);
     }
+    
+    
 }
