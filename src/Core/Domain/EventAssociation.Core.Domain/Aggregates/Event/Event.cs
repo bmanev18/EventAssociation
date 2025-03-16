@@ -10,8 +10,8 @@ public class Event : AggregateRoot
     internal EventId Id { get; }
     internal EventTitle Title { get; private set; }
     internal EventDescription Description { get; private set; }
-    internal EventTime StartDate { get; }
-    internal EventTime EndDate { get; }
+    internal EventTime? StartDate { get; private set; }
+    internal EventTime? EndDate { get; private set; }
     internal EventMaxParticipants MaxParticipants { get; private set; }
     internal EventType Type { get; private set; }
     internal EventStatus Status { get; private set; }
@@ -21,7 +21,7 @@ public class Event : AggregateRoot
 
     // private GuestList guestList;
 
-    private Event(EventId id, EventTitle title, EventDescription description, EventTime startDate, EventTime endDate,
+    private Event(EventId id, EventTitle title, EventDescription description, EventTime? startDate, EventTime? endDate,
         EventMaxParticipants maxParticipants, EventType type, EventStatus status, Location location)
     {
         this.Id = id;
@@ -42,9 +42,9 @@ public class Event : AggregateRoot
         var eventDescription = EventDescription.CreateEventDescription("").Unwrap();
         var maxParticipants = EventMaxParticipants.Create(5).Unwrap();
         var eventStatus = EventStatus.Draft;
-        var event_ = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus,
+        var newEvent = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus,
             location);
-        return Result<Event>.Ok(event_);
+        return Result<Event>.Ok(newEvent);
     }
 
 
@@ -125,6 +125,14 @@ public class Event : AggregateRoot
 
     public Result<None> ChangeEventStatusToActive()
     {
+        // ChangeEventStatusToReady will check for invalid fields and also make sure the status is Ready
+        // F1 + F2
+        var eventIsReady = ChangeEventStatusToReady();
+        if (!eventIsReady.IsSuccess)
+        {
+            return eventIsReady;
+        }
+        
         this.Status = EventStatus.Active;
         return Result<None>.Ok(None.Value);
     }
@@ -143,6 +151,41 @@ public class Event : AggregateRoot
 
     public Result<None> ChangeEventStatusToReady()
     {
+        // F1 + F2
+        if (Status != EventStatus.Draft)
+        {
+            return Result<None>.Err(new Error("100", "Cannot change the status of an event, which is not in draft"));
+        }
+
+        var results = new List<Result<None>>();
+        // F4
+        if (Title.IsEmptyOrDefualt())
+        {
+            results.Add(Result<None>.Err(new Error("100", "Title cannot be empty or kept default")));
+        }
+        // F1 time checks
+        if (StartDate == null || EndDate == null)
+        {
+            results.Add(Result<None>.Err(new Error("100", "Start and end dates are required")));
+        }
+
+        var validate = Result<None>.AssertResponses(results);
+        if (!validate.IsSuccess)
+        {
+            return validate;
+        }
+
+        // F3
+
+        var isEventInTheFuture = StartDate.LaterThanNow();
+        if (!isEventInTheFuture.IsSuccess)
+        {
+            return isEventInTheFuture;
+        }
+
+        // TODO add additional checks:
+
+
         this.Status = EventStatus.Ready;
         return Result<None>.Ok(None.Value);
     }
@@ -160,7 +203,7 @@ public class Event : AggregateRoot
 
     public Result<None> ChangeEventTypeToPrivate()
     {
-        if (this.Status == EventStatus.Active || this.Status == EventStatus.Cancelled)
+        if (this.Status is EventStatus.Active or EventStatus.Cancelled)
         {
             return Result<None>.Err(new Error("100", "Cannot change the event type of an active or cancelled event"));
         }
@@ -192,6 +235,9 @@ public class Event : AggregateRoot
         {
             ChangeEventStatusToDraft();
         }
+
+        StartDate = startTime;
+        EndDate = endTime;
 
         return Result<None>.Ok(None.Value);
     }

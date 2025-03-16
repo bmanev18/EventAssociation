@@ -82,14 +82,14 @@
   - [ ] F2 - Event is cancelled
       
 - Use Case 10: An anonymous user (aka Anon) registers a new Guest accoun
-  - [ ] S1
-  - [ ] F1 – Email domain incorrect
-  - [ ] F2 – Email format incorrect
-  - [ ] F3 – First name is invalid
-  - [ ] F4 – Last name is invalid
-  - [ ] F5 – Email already used
-  - [ ] F6 – Names contain non-letter characters
-  - [ ] F7 – URL invalid format
+  - [x] S1
+  - [x] F1 – Email domain incorrect
+  - [x] F2 – Email format incorrect
+  - [x] F3 – First name is invalid
+  - [x] F4 – Last name is invalid
+  - [x] F5 – Email already used
+  - [x] F6 – Names contain non-letter characters
+  - [x] F7 – URL invalid format
     
 - Use Case 11: Guest participates public even
   - [ ] S1
