@@ -7,8 +7,11 @@ namespace UnitTests.Features.Guest.Register;
 using EventAssociation.Core.Domain.Aggregates.Guests;
 
 
-public class RegisterGuest_test
+public class RegisterGuesttest
 {
+    
+    private readonly FakeEmailChecker fakeEmailChecker = new FakeEmailChecker();
+
     [Fact]
     public async Task Create_Guest_With_Unique_Email_Should_Succeed()
     {
@@ -16,9 +19,7 @@ public class RegisterGuest_test
         var name = GuestName.Create("Michael", "Jackson").Unwrap();
         var email = GuestVIAEmail.Create("abc@via.dk").Unwrap();
         var image = GuestImageUrl.Create(new Uri("https://example.com/johndoe.jpg")).Unwrap();
-
-        var fakeEmailChecker = new FakeEmailChecker();
-
+        
         // Act
         var result = Guest.Create(name, email, image, fakeEmailChecker);
 
@@ -38,8 +39,6 @@ public class RegisterGuest_test
         var email = GuestVIAEmail.Create("abcd@via.dk").Unwrap();
         var image = GuestImageUrl.Create(new Uri("https://example.com/johndoe.jpg")).Unwrap();
         
-        var fakeEmailChecker = new FakeEmailChecker();
-        
         // Act
         var result = Guest.Create(name, email, image, fakeEmailChecker);
     
@@ -47,4 +46,6 @@ public class RegisterGuest_test
         Assert.False(result.IsSuccess);
         Assert.Equal("Email already exists", result.UnwrapErr().First().Message);
     }
+    
+    
 }

@@ -14,6 +14,10 @@ public class GuestImageUrl : ValueObject
 
     public static Result<GuestImageUrl> Create(Uri url)
     {
+        if (string.IsNullOrWhiteSpace(url.ToString()))
+        {
+            return Result<GuestImageUrl>.Err(new Error(nameof(url), "URL is invalid"));
+        }
         var result = new GuestImageUrl(url);
         return Result<GuestImageUrl>.Ok(result);
     }

@@ -57,7 +57,7 @@ public class GuestName: ValueObject
     {
         if (string.IsNullOrEmpty(anyname))
         {
-            return Result<None>.Err(new Error(" ", " Cannot have empty names!"));
+            return Result<None>.Err(new Error(" ", "Cannot have empty names!"));
         }
         return Result<None>.Ok(None.Value);
     }
