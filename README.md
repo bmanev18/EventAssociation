@@ -91,13 +91,13 @@
   - [x] F6 – Names contain non-letter characters
   - [x] F7 – URL invalid format
     
-- Use Case 11: Guest participates public even
-  - [ ] S1
-  - [ ] F1 – Event not active
-  - [ ] F2 – No more room
-  - [ ] F3 – Cannot join active event
-  - [ ] F4 – Cannot join private event
-  - [ ] F5 – Guest is already participating
+- Use Case 11: Guest participates public event
+  - [x] S1
+  - [x] F1 – Event not active
+  - [x] F2 – No more room
+  - [x] F3 – Cannot join active event
+  - [x] F4 – Cannot join private event
+  - [x] F5 – Guest is already participating
     
 - Use Case 12: Guest cancels event participation
   - [ ] S1
