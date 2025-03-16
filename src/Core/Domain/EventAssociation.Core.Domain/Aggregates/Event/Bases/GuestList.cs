@@ -32,7 +32,7 @@ public class GuestList
     
     public Result<Guest> RemoveGuest(GuestId guestId)
     {
-        var guest = _guests.FirstOrDefault(g => g.id == guestId);
+        var guest = _guests.FirstOrDefault(g => g.id.Equals(guestId));
         if (guest == null)
         {
             return Result<Guest>.Err(new Error("100", "Guest not found."));
@@ -53,10 +53,9 @@ public class GuestList
         return Result<None>.Ok(None.Value);
     }
     
-    public Result<bool> IsGuestAlreadyInList(Guest guest)
+    public bool IsGuestAlreadyInList(Guest guest)
     {
-        var isInList = _guests.Any(g => g.id.Equals(guest.id));
-        return Result<bool>.Ok(isInList);
+        return _guests.Any(g => g.id.Equals(guest.id));
     }
     
     public int GetTotalGuests()
