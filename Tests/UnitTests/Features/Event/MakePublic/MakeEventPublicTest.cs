@@ -17,7 +17,7 @@ public class MakeEventPublicTest
         var title = EventTitle.CreateEventTitle("Birthday Party").Unwrap();
         var description = EventDescription.CreateEventDescription("Surprised event").Unwrap();
             
-        var newEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
+        var newEvent = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
         var setTitle = newEvent.ChangeTitle(title);
         Assert.True(setTitle.IsSuccess);
 
@@ -39,7 +39,7 @@ public class MakeEventPublicTest
         var locationCapacity = LocationCapacity.Create(20).Unwrap();
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
             
-        var cancelledEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
+        var cancelledEvent = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
         cancelledEvent.ChangeEventStatusToCancelled();
 
         // Act
@@ -58,7 +58,7 @@ public class MakeEventPublicTest
         var locationCapacity = LocationCapacity.Create(20).Unwrap();
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
             
-        var readyEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
+        var readyEvent = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
         readyEvent.ChangeEventStatusToReady();
         
         // Act
@@ -77,7 +77,7 @@ public class MakeEventPublicTest
         var locationCapacity = LocationCapacity.Create(20).Unwrap();
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
             
-        var draftEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
+        var draftEvent = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
         
         // Act
         var result = draftEvent.ChangeEventTypeToPublic();

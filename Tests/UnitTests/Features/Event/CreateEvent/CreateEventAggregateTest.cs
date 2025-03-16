@@ -19,7 +19,7 @@ public class CreateEventAggregateTest
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
 
         // Act
-        var result = Event.CreateEvent(location, EventType.Private);
+        var result = Event.CreateEvent(location, EventType.Private, null, null);
         
         // Assert
         Assert.True(result.IsSuccess);
@@ -36,7 +36,7 @@ public class CreateEventAggregateTest
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
 
         // Act
-        var createdEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
+        var createdEvent = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
 
         // Assert
         Assert.Equal(EventTitle.CreateEventTitle("Working Title").Unwrap(),createdEvent.Title);

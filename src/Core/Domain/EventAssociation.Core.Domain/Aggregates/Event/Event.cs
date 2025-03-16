@@ -1,5 +1,7 @@
+using EventAssociation.Core.Domain.Aggregates.Event.Bases;
 using EventAssociation.Core.Domain.Aggregates.Event.Values;
 using EventAssociation.Core.Domain.Aggregates.Events.Values;
+using EventAssociation.Core.Domain.Aggregates.Guests;
 using EventAssociation.Core.Domain.Aggregates.Locations;
 using EventAssociation.Core.Tools.OperationResult;
 
@@ -15,11 +17,9 @@ public class Event : AggregateRoot
     internal EventMaxParticipants MaxParticipants { get; private set; }
     internal EventType Type { get; private set; }
     internal EventStatus Status { get; private set; }
-
     internal Location Location { get; private set; }
 
-
-    // private GuestList guestList;
+    internal GuestList guestList;
 
     private Event(EventId id, EventTitle title, EventDescription description, EventTime? startDate, EventTime? endDate,
         EventMaxParticipants maxParticipants, EventType type, EventStatus status, Location location)
@@ -33,16 +33,17 @@ public class Event : AggregateRoot
         this.Type = type;
         this.Status = status;
         this.Location = location;
+        this.guestList = GuestList.Create().Unwrap();
     }
 
-    public static Result<Event> CreateEvent(Location location, EventType eventType)
+    public static Result<Event> CreateEvent(Location location, EventType eventType, EventTime? startDate, EventTime? endDate)
     {
         var id = new EventId(Guid.NewGuid());
         var eventTitle = EventTitle.CreateEventTitle("Working Title").Unwrap();
         var eventDescription = EventDescription.CreateEventDescription("").Unwrap();
         var maxParticipants = EventMaxParticipants.Create(5).Unwrap();
         var eventStatus = EventStatus.Draft;
-        var newEvent = new Event(id, eventTitle, eventDescription, null, null, maxParticipants, eventType, eventStatus,
+        var newEvent = new Event(id, eventTitle, eventDescription, startDate, endDate, maxParticipants, eventType, eventStatus,
             location);
         return Result<Event>.Ok(newEvent);
     }
@@ -274,5 +275,37 @@ public class Event : AggregateRoot
         {
             return Result<None>.Err(new Error("100", "End time is more than one day after Start time"));
         }
+    }
+
+    public Result<None> RegisterGuest(Guest guest)
+    {
+        if (Status != EventStatus.Active)
+        {
+            return Result<None>.Err(new Error("100", "Cannot register an inactive event"));
+        }
+        
+        if (Type != EventType.Public)
+        {
+            return Result<None>.Err(new Error("100", "You cannot register as a guest in a private event"));
+        }
+
+        if (guestList.GetTotalGuests() >= MaxParticipants.Value)
+        {
+            return Result<None>.Err(new Error("100", "There are no available spots in the guest list"));
+        }
+        
+        var isEventInTheFuture = StartDate.LaterThanNow();
+        if (!isEventInTheFuture.IsSuccess)
+        {
+            return Result<None>.Err(new Error("100", "Cannot join an event that has already started."));
+        }
+
+        if (guestList.IsGuestAlreadyInList(guest).IsSuccess)
+        {
+            return Result<None>.Err(new Error("100", "You are already registered to attend this event"));
+        }
+
+        guestList.AddGuest(guest);
+        return Result<None>.Ok(None.Value);
     }
 }

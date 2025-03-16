@@ -20,7 +20,7 @@ public class MakeEventPrivateTest
         var title = EventTitle.CreateEventTitle("Birthday Party").Unwrap();
         var description = EventDescription.CreateEventDescription("Surprised event").Unwrap();
             
-        var newEvent = Event.CreateEvent(location, EventType.Public).Unwrap();
+        var newEvent = Event.CreateEvent(location, EventType.Public, null, null).Unwrap();
         var setTitle = newEvent.ChangeTitle(title);
         Assert.True(setTitle.IsSuccess);
 
@@ -67,7 +67,7 @@ public class MakeEventPrivateTest
             var locationCapacity = LocationCapacity.Create(20).Unwrap();
             var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
             
-            var eventWithPublicType = Event.CreateEvent(location, EventType.Private).Unwrap();
+            var eventWithPublicType = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
             eventWithPublicType.ChangeEventStatusToReady();
 
             // Act
@@ -87,7 +87,7 @@ public class MakeEventPrivateTest
             var locationCapacity = LocationCapacity.Create(20).Unwrap();
             var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
 
-            var eventWithPrivateType = Event.CreateEvent(location, EventType.Private).Unwrap();
+            var eventWithPrivateType = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
             eventWithPrivateType.ChangeEventStatusToReady();
 
             // Act
@@ -106,10 +106,10 @@ public class MakeEventPrivateTest
             var locationCapacity = LocationCapacity.Create(20).Unwrap();
             var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
 
-            var eventWithPrivateType = Event.CreateEvent(location, EventType.Private).Unwrap();
+            var eventWithPrivateType = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
             eventWithPrivateType.ChangeEventStatusToReady();
 
-            var eventWithInvalidType = Event.CreateEvent(location, EventType.Public).Unwrap();
+            var eventWithInvalidType = Event.CreateEvent(location, EventType.Public, null, null).Unwrap();
             eventWithInvalidType.ChangeEventStatusToCancelled();
             
 

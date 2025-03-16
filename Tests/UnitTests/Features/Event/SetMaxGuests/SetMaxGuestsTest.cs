@@ -17,7 +17,7 @@ public class SetMaxGuestsTest
         var locationCapacity = LocationCapacity.Create(40).Unwrap();
         var locationName = LocationName.Create("Meadows").Unwrap();
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
-        var event_ = Event.CreateEvent(location, EventType.Private).Unwrap();
+        var event_ = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
         
         // Act
         var result = event_.UpdateMaxNumberOfParticipants(49);
@@ -37,7 +37,7 @@ public class SetMaxGuestsTest
         var title = EventTitle.CreateEventTitle("Birthday Party").Unwrap();
         var description = EventDescription.CreateEventDescription("Surprised event").Unwrap();
 
-        var newEvent = Event.CreateEvent(location, EventType.Public).Unwrap();
+        var newEvent = Event.CreateEvent(location, EventType.Public, null, null).Unwrap();
         var setTitle = newEvent.ChangeTitle(title);
         Assert.True(setTitle.IsSuccess);
 
@@ -69,7 +69,7 @@ public class SetMaxGuestsTest
         var locationCapacity = LocationCapacity.Create(100).Unwrap();
         var locationName = LocationName.Create("Meadows").Unwrap();
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
-        var event_ = Event.CreateEvent(location, EventType.Private).Unwrap();
+        var event_ = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
         event_.ChangeEventStatusToCancelled();
         
         
@@ -88,7 +88,7 @@ public class SetMaxGuestsTest
         var locationCapacity = LocationCapacity.Create(100).Unwrap();
         var locationName = LocationName.Create("Meadows").Unwrap();
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
-        var event_ = Event.CreateEvent(location, EventType.Private).Unwrap();
+        var event_ = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
     
         // Act
         var result = event_.UpdateMaxNumberOfParticipants(40);

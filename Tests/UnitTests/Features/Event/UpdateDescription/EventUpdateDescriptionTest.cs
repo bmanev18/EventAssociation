@@ -21,7 +21,7 @@ public class EventUpdateDescriptionTest
         var title = EventTitle.CreateEventTitle("Birthday Party").Unwrap();
         var description = EventDescription.CreateEventDescription("Surprised event").Unwrap();
             
-        var newEvent = Event.CreateEvent(location, EventType.Public).Unwrap();
+        var newEvent = Event.CreateEvent(location, EventType.Public, null, null).Unwrap();
         var setTitle = newEvent.ChangeTitle(title);
         Assert.True(setTitle.IsSuccess);
 
@@ -52,7 +52,7 @@ public class EventUpdateDescriptionTest
             var locationName = LocationName.Create("Meadows").Unwrap();
             var locationCapacity = LocationCapacity.Create(20).Unwrap();
             var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
-            var cancelledEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
+            var cancelledEvent = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
             cancelledEvent.ChangeEventStatusToCancelled();
             var newDescription = EventDescription.CreateEventDescription("New Event Description");
         
@@ -71,7 +71,7 @@ public class EventUpdateDescriptionTest
             var locationName = LocationName.Create("Meadows").Unwrap();
             var locationCapacity = LocationCapacity.Create(20).Unwrap();
             var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
-            var readyEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
+            var readyEvent = Event.CreateEvent(location, EventType.Private, null ,null).Unwrap();
             readyEvent.ChangeEventStatusToReady();
             var newDescription = EventDescription.CreateEventDescription("New Event Title");
         
@@ -92,7 +92,7 @@ public class EventUpdateDescriptionTest
             var locationName = LocationName.Create("Meadows").Unwrap();
             var locationCapacity = LocationCapacity.Create(20).Unwrap();
             var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
-            var draftEvent = Event.CreateEvent(location, EventType.Private).Unwrap();
+            var draftEvent = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
             draftEvent.ChangeEventStatusToDraft();
             var newDescription = EventDescription.CreateEventDescription("New Event Title");
         

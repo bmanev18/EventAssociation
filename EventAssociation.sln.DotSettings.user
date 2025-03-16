@@ -53,5 +53,6 @@
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Guest.Register.GuestVIAEmailTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Guest.Register.GuestNameTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Guest.Register.GuestImageUrlTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::EventAssociation.Tests.EventTests.RegisterGuest_Success_Scenario_S1&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
