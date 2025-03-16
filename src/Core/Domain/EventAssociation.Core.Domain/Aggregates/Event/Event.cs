@@ -10,8 +10,8 @@ public class Event : AggregateRoot
     internal EventId Id { get; }
     internal EventTitle Title { get; private set; }
     internal EventDescription Description { get; private set; }
-    internal EventTime? StartDate { get; }
-    internal EventTime? EndDate { get; }
+    internal EventTime? StartDate { get; private set; }
+    internal EventTime? EndDate { get; private set; }
     internal EventMaxParticipants MaxParticipants { get; private set; }
     internal EventType Type { get; private set; }
     internal EventStatus Status { get; private set; }
@@ -164,12 +164,19 @@ public class Event : AggregateRoot
             results.Add(Result<None>.Err(new Error("100", "Title cannot be empty or kept default")));
         }
         // F1 time checks
-        else if (StartDate == null || EndDate == null)
+        if (StartDate == null || EndDate == null)
         {
             results.Add(Result<None>.Err(new Error("100", "Start and end dates are required")));
         }
-        
+
+        var validate = Result<None>.AssertResponses(results);
+        if (!validate.IsSuccess)
+        {
+            return validate;
+        }
+
         // F3
+
         var isEventInTheFuture = StartDate.LaterThanNow();
         if (!isEventInTheFuture.IsSuccess)
         {
@@ -178,11 +185,6 @@ public class Event : AggregateRoot
 
         // TODO add additional checks:
 
-        var validate = Result<None>.AssertResponses(results);
-        if (!validate.IsSuccess)
-        {
-            return validate;
-        }
 
         this.Status = EventStatus.Ready;
         return Result<None>.Ok(None.Value);
@@ -201,7 +203,7 @@ public class Event : AggregateRoot
 
     public Result<None> ChangeEventTypeToPrivate()
     {
-        if (this.Status == EventStatus.Active || this.Status == EventStatus.Cancelled)
+        if (this.Status is EventStatus.Active or EventStatus.Cancelled)
         {
             return Result<None>.Err(new Error("100", "Cannot change the event type of an active or cancelled event"));
         }
@@ -233,6 +235,9 @@ public class Event : AggregateRoot
         {
             ChangeEventStatusToDraft();
         }
+
+        StartDate = startTime;
+        EndDate = endTime;
 
         return Result<None>.Ok(None.Value);
     }

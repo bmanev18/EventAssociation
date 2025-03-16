@@ -1,3 +1,5 @@
+using EventAssociation.Core.Domain.Aggregates.Event.Values;
+
 namespace UnitTests.Features.Event.SetMaxGuests;
 using EventAssociation.Core.Domain.Aggregates.Events.Values;
 using EventAssociation.Core.Domain.Aggregates.Locations;
@@ -29,16 +31,30 @@ public class SetMaxGuestsTest
     public void UpdateMaxNumberOfParticipants_ShouldFail_WhenReducingParticipantsForActiveEvent()
     {
         // Arrange
-        var locationCapacity = LocationCapacity.Create(100).Unwrap();
         var locationName = LocationName.Create("Meadows").Unwrap();
+        var locationCapacity = LocationCapacity.Create(100).Unwrap();
         var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
-        var event_ = Event.CreateEvent(location, EventType.Private).Unwrap();
+        var title = EventTitle.CreateEventTitle("Birthday Party").Unwrap();
+        var description = EventDescription.CreateEventDescription("Surprised event").Unwrap();
+
+        var newEvent = Event.CreateEvent(location, EventType.Public).Unwrap();
+        var setTitle = newEvent.ChangeTitle(title);
+        Assert.True(setTitle.IsSuccess);
+
+        var setDescription = newEvent.ChangeDescription(description);
+        Assert.True(setDescription.IsSuccess);
+
+        var startTime = new DateTime(new DateOnly(2026, 12, 31), new TimeOnly(13, 00));
+        var endTime = new DateTime(new DateOnly(2026, 12, 31), new TimeOnly(15, 00));
+        var setTimes = newEvent.ChangeTimes(new EventTime(startTime), new EventTime(endTime));
+        Assert.True(setTimes.IsSuccess);
         
-        event_.UpdateMaxNumberOfParticipants(30);
-        event_.ChangeEventStatusToActive();
+        newEvent.UpdateMaxNumberOfParticipants(30);
+        newEvent.ChangeEventStatusToActive();
+        Assert.Equal(EventStatus.Active, newEvent.Status);
     
         // Act
-        var result = event_.UpdateMaxNumberOfParticipants(20);
+        var result = newEvent.UpdateMaxNumberOfParticipants(20);
     
         // Assert
         Assert.False(result.IsSuccess);
