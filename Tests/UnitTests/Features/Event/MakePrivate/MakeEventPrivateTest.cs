@@ -1,3 +1,4 @@
+using EventAssociation.Core.Domain.Aggregates.Event.Values;
 using EventAssociation.Core.Domain.Aggregates.Locations;
 using EventAssociation.Core.Domain.Aggregates.Locations.Values;
 
@@ -11,18 +12,38 @@ using EventAssociation.Core.Tools.OperationResult;
 
 public class MakeEventPrivateTest
 {
+    private Event DummyPublicEvent()
+    {
+        var locationName = LocationName.Create("Meadows").Unwrap();
+        var locationCapacity = LocationCapacity.Create(20).Unwrap();
+        var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
+        var title = EventTitle.CreateEventTitle("Birthday Party").Unwrap();
+        var description = EventDescription.CreateEventDescription("Surprised event").Unwrap();
+            
+        var newEvent = Event.CreateEvent(location, EventType.Public).Unwrap();
+        var setTitle = newEvent.ChangeTitle(title);
+        Assert.True(setTitle.IsSuccess);
+
+        var setDescription = newEvent.ChangeDescription(description);
+        Assert.True(setDescription.IsSuccess);
+            
+        var startTime = new DateTime(new DateOnly(2026, 12, 31), new TimeOnly(13, 00));
+        var endTime = new DateTime(new DateOnly(2026, 12, 31), new TimeOnly(15, 00));
+        var setTimes = newEvent.ChangeTimes(new EventTime(startTime), new EventTime(endTime));
+        Assert.True(setTimes.IsSuccess);
+        
+        return newEvent;
+    }
+    
     [Fact]
         public void ChangeEventType_ShouldReturnError_WhenEventIsActiveOrCancelled()
         {
             // Arrange
-            var locationName = LocationName.Create("Meadows").Unwrap();
-            var locationCapacity = LocationCapacity.Create(20).Unwrap();
-            var location = Location.CreateLocation(LocationType.Outside, locationName, locationCapacity).Unwrap();
-
-            var activeEvent = Event.CreateEvent(location, EventType.Public).Unwrap();
+            var activeEvent = DummyPublicEvent();
             activeEvent.ChangeEventStatusToActive();
+            Assert.Equal(EventStatus.Active,activeEvent.Status);
             
-            var cancelledEvent = Event.CreateEvent(location, EventType.Public).Unwrap();
+            var cancelledEvent = DummyPublicEvent();
             cancelledEvent.ChangeEventStatusToCancelled();
 
             // Act
