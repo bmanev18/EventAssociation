@@ -47,7 +47,7 @@ public class EventTime: ValueObject
             : Result<None>.Err(new Error("BEFORE_EIGHT", "Time is before 8 AM"));
     }
 
-    public Result<None> Before12AM()
+    public Result<None> Before12Am()
     {
         return Value.Hour < 23 || (Value.Hour == 23 && Value.Minute == 0) 
             ? Result<None>.Ok(None.Value) 
@@ -64,7 +64,7 @@ public class EventTime: ValueObject
     public Result<None> IsNextDayFrom(EventTime other)
     {
         var nextDayFromOther = other.Value.AddDays(1);  // Start of the next day (00:00)
-        return Value.Date == nextDayFromOther 
+        return Value.Date == nextDayFromOther.Date 
             ? Result<None>.Ok(None.Value) 
             : Result<None>.Err(new Error("NOT_NEXT_DAY", "Time is not the next day"));
     }

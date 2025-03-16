@@ -265,7 +265,7 @@ public class Event : AggregateRoot
 
         if (startTime.isTheSameDayAs(endTime).IsSuccess)
         {
-            return endTime.Before12AM();
+            return endTime.Before12Am();
         }
         else if (endTime.IsNextDayFrom(startTime).IsSuccess)
         {
