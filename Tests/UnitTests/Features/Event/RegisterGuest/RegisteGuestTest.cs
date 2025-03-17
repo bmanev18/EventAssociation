@@ -57,7 +57,7 @@ namespace EventAssociation.Tests;
 
 
             // Act
-            var result = mockEvent.RegisterGuest(guest);
+            var result = mockEvent.RegisterGuestToEvent(guest);
 
             // Assert
             Assert.True(result.IsSuccess);
@@ -78,7 +78,7 @@ namespace EventAssociation.Tests;
             var guest = Guest.Create(guestName, guestEmail, guestImage, fakeEmailChecker).Unwrap();
 
             // Act: Try registering without activating the event
-            var result = mockEvent.RegisterGuest(guest);
+            var result = mockEvent.RegisterGuestToEvent(guest);
 
             // Assert
             Assert.False(result.IsSuccess);
@@ -103,15 +103,15 @@ namespace EventAssociation.Tests;
             mockEvent.ChangeEventStatusToActive();
 
             // Register first guests
-            mockEvent.RegisterGuest(guest1);
-            mockEvent.RegisterGuest(guest2);
-            mockEvent.RegisterGuest(guest3);
-            mockEvent.RegisterGuest(guest4);
-            mockEvent.RegisterGuest(guest5);
+            mockEvent.RegisterGuestToEvent(guest1);
+            mockEvent.RegisterGuestToEvent(guest2);
+            mockEvent.RegisterGuestToEvent(guest3);
+            mockEvent.RegisterGuestToEvent(guest4);
+            mockEvent.RegisterGuestToEvent(guest5);
 
 
             // Act: should fail due to no capacity
-            var result = mockEvent.RegisterGuest(guest6);
+            var result = mockEvent.RegisterGuestToEvent(guest6);
 
             // Assert
             Assert.False(result.IsSuccess);
@@ -136,7 +136,7 @@ namespace EventAssociation.Tests;
             mockEvent.ChangeEventStatusToActive().Unwrap();
 
             // Act: Try registering for a private event
-            var result = mockEvent.RegisterGuest(guest);
+            var result = mockEvent.RegisterGuestToEvent(guest);
 
             // Assert
             Assert.False(result.IsSuccess);
@@ -162,10 +162,10 @@ namespace EventAssociation.Tests;
             mockEvent.ChangeEventStatusToActive().Unwrap();
 
             // Register the guest
-            mockEvent.RegisterGuest(guest).Unwrap();
+            mockEvent.RegisterGuestToEvent(guest).Unwrap();
 
             // Act: Try registering the same guest again (should fail)
-            var result = mockEvent.RegisterGuest(guest);
+            var result = mockEvent.RegisterGuestToEvent(guest);
 
             // Assert
             Assert.False(result.IsSuccess);
@@ -184,7 +184,7 @@ namespace EventAssociation.Tests;
             var guest = CreateGuest();
 
             // Act
-            var result = mockEvent.RegisterGuest(guest);
+            var result = mockEvent.RegisterGuestToEvent(guest);
 
             // Assert
             Assert.False(result.IsSuccess);

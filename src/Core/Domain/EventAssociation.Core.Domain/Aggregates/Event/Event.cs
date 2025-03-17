@@ -277,7 +277,7 @@ public class Event : AggregateRoot
         }
     }
 
-    public Result<None> RegisterGuest(Guest guest)
+    public Result<None> RegisterGuestToEvent(Guest guest)
     {
         var isEventInTheFuture = StartDate.LaterThanNow();
         if (!isEventInTheFuture.IsSuccess)
@@ -308,6 +308,20 @@ public class Event : AggregateRoot
         guestList.AddGuest(guest);
         return Result<None>.Ok(None.Value);
     }
-    
-    
+
+    public Result<None> WithdrawGuestFromAnEvent(Guest guest)
+    {
+        if (!guestList.IsGuestAlreadyInList(guest))
+        {
+            return Result<None>.Err(new Error("100", "You are not registered to attend this event."));
+        }
+
+        if (Status == EventStatus.Active)
+        {
+            return Result<None>.Err(new Error("100", "You cannot withdraw from an active event."));
+        }
+        
+        guestList.RemoveGuest(guest);
+        return Result<None>.Ok(None.Value);
+    }
 }
