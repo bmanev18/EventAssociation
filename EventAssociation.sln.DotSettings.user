@@ -21,6 +21,13 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3089b4ed_002D2f80_002D4c5e_002D971e_002Db6079f6339c1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UpdateMaxNumberOfParticipants_ShouldFail_WhenReducingParticipantsForActiveEvent" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\Bozhidar Manev\Documents\GitHub\EventAssociation\Tests\UnitTests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;UnitTests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=53338339_002D057a_002D4f02_002Dbd9c_002D38c87165068b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="WithdrawGuest_Success_WhenEventIsNotActive" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::EventAssociation.Tests.WithdrawGuestTest.WithdrawGuest_Fail_WhenEventIsNotActive&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::EventAssociation.Tests.WithdrawGuestTest.WithdrawGuest_Success_WhenEventIsNotActive&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::EventAssociation.Tests.WithdrawGuestTest.WithdrawGuest_Failure_WhenGuestNotRegistered&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=76361b5e_002D7a21_002D4cee_002D94dd_002D5416b333c9f8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ChangeEventType_ShouldReturnError_WhenEventIsActiveOrCancelled" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::UnitTests.Features.Event.MakePrivate.MakeEventPrivateTest.ChangeEventType_ShouldReturnError_WhenEventIsActiveOrCancelled&lt;/TestId&gt;&#xD;
