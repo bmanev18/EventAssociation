@@ -30,10 +30,10 @@ public class GuestList
         return Result<Guest>.Ok(guest);
     }
     
-    public Result<Guest> RemoveGuest(GuestId guestId)
+    public Result<Guest> RemoveGuest(Guest guest)
     {
-        var guest = _guests.FirstOrDefault(g => g.id.Equals(guestId));
-        if (guest == null)
+        var foundGuest = _guests.FirstOrDefault(g => g.id.Equals(guest.id));
+        if (foundGuest == null)
         {
             return Result<Guest>.Err(new Error("100", "Guest not found."));
         }

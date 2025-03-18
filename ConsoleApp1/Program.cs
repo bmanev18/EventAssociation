@@ -35,5 +35,9 @@ var validUrl = new Uri("https://example.com/profile.jpg");
 var guestImage = GuestImageUrl.Create(validUrl).Unwrap();
 
 var guest = Guest.Create(guestName, guestEmail, guestImage, null).Unwrap();
+newEvent.ChangeEventStatusToActive();
+
+var result = newEvent.RegisterGuestToEvent(guest);
+Console.WriteLine(result.IsSuccess);
 
 
