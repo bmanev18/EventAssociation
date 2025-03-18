@@ -30,22 +30,22 @@
   - [x] F3 - Event is active
     
 - Use Case 4: The creator updates the start and end time of the event
-  - [ ] S1
-  - [ ] S2
-  - [ ] S3
-  - [ ] S4
-  - [ ] S5
-  - [ ] F1 - Start date is after end date
-  - [ ] F2 - Start time is after end date
-  - [ ] F3 - Event duration too short
-  - [ ] F4 - Event duration too short
-  - [ ] F5 - Event start time too early
-  - [ ] F6 - Event end time after 01:00
-  - [ ] F7 - Event is active
-  - [ ] F8 - Event is cancelled
-  - [ ] F9 - Event duration too long
-  - [ ] F10 - Event start time is in the past
-  - [ ] F11 - Event durations spans invalid time.
+  - [x] S1
+  - [x] S2
+  - [x] S3
+  - [x] S4
+  - [x] S5
+  - [x] F1 - Start date is after end date
+  - [x] F2 - Start time is after end date
+  - [x] F3 - Event duration too short
+  - [x] F4 - Event duration too short
+  - [x] F5 - Event start time too early
+  - [x] F6 - Event end time after 01:00
+  - [x] F7 - Event is active
+  - [x] F8 - Event is cancelled
+  - [x] F9 - Event duration too long
+  - [x] F10 - Event start time is in the past
+  - [x] F11 - Event durations spans invalid time.
         
 - Use Case 5: The creator makes the event public
   - [x] S1
@@ -68,18 +68,18 @@
   - [x] F5 - Guest number exceeds maximum
       
 - Use Case 8: The creator readies an event
-  - [ ] S1
-  - [ ] F1 - Event is draft
-  - [ ] F2 - event is cancelled
-  - [ ] F3 - Event is in the past
-  - [ ] F4 - Event title is default
+  - [x] S1
+  - [x] F1 - Event is draft
+  - [x] F2 - event is cancelled
+  - [x] F3 - Event is in the past
+  - [x] F4 - Event title is default
   
 - Use Case 9: The creator activates an event
-  - [ ] S1
-  - [ ] S2
-  - [ ] S3
-  - [ ] F1 - Event is draft
-  - [ ] F2 - Event is cancelled
+  - [x] S1
+  - [x] S2
+  - [x] S3
+  - [x] F1 - Event is draft
+  - [x] F2 - Event is cancelled
       
 - Use Case 10: An anonymous user (aka Anon) registers a new Guest accoun
   - [x] S1
@@ -100,11 +100,11 @@
   - [x] F5 – Guest is already participating
     
 - Use Case 12: Guest cancels event participation
-  - [ ] S1
-  - [ ] S2
-  - [ ] F1 - Event is active
+  - [x] S1
+  - [x] S2
+  - [x] F1 - Event is active
 
-- Use Case 13: Guest is invited to even
+- Use Case 13: Guest is invited to event
   - [ ] S1
   - [ ] F1 – Event is draft or cancelled
   - [ ] F2 – No more room
