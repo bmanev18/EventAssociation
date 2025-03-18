@@ -26,6 +26,7 @@
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::CreateInvitationTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::AcceptInvitationTests.AcceptInvitation_Successful_WhenEventIsActive_AndNotFull&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::AcceptInvitationTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::1295B8D3-6805-4A60-B935-EC6117068E77::net9.0::DeclineInvitationTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=53338339_002D057a_002D4f02_002Dbd9c_002D38c87165068b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="WithdrawGuest_Success_WhenEventIsNotActive" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;

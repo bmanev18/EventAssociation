@@ -91,8 +91,23 @@ public class Invitation: AggregateRoot
         InvitationStatus = InvitationStatus.Accepted;
         return Result<None>.Ok(None.Value);
     }
-    
-    
-    
 
+    public Result<None> DeclineInvitation(EventStatus eventStatus)
+    {
+        var errors = new List<Error>();
+
+        if (eventStatus == EventStatus.Cancelled)
+        {
+            errors.Add(new Error("100", "Cancelled events cannot be declined."));
+        }
+        
+        if (errors.Any())
+        {
+            return Result<None>.Err(errors.ToArray());
+        }
+        
+        InvitationStatus = InvitationStatus.Rejected;
+        return Result<None>.Ok(None.Value);
+    }
+    
 }
