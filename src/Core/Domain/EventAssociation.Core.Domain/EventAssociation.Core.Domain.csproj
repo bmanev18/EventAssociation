@@ -8,6 +8,8 @@
 
     <ItemGroup>
       <Folder Include="Aggregates\Guests\Bases\" />
+      <Folder Include="Aggregates\Invitation\Bases\" />
+      <Folder Include="Aggregates\Invitation\Contracts\" />
       <Folder Include="Aggregates\Locations\Bases\" />
       <Folder Include="Common\Values\" />
     </ItemGroup>
