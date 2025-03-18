@@ -1,6 +1,6 @@
 using EventAssociation.Core.Domain.Common.Values;
 
-namespace EventAssociation.Core.Domain.Aggregates.Events.Values;
+namespace EventAssociation.Core.Domain.Aggregates.Guests.Values;
 
 public class GuestId: ValueObject
 {

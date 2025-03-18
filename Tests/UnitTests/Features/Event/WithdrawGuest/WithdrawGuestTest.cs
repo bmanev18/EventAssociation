@@ -5,7 +5,6 @@ using EventAssociation.Core.Domain.Aggregates.Locations;
 using EventAssociation.Core.Tools.OperationResult;
 using System;
 using EventAssociation.Core.Domain.Aggregates.Event.Values;
-using EventAssociation.Core.Domain.Aggregates.Events.Values;
 using EventAssociation.Core.Domain.Aggregates.Guests.Values;
 using EventAssociation.Core.Domain.Aggregates.Locations.Values;
 using UnitTests.Fakes;

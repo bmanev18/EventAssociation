@@ -2,7 +2,6 @@
 
 using EventAssociation.Core.Domain.Aggregates.Event;
 using EventAssociation.Core.Domain.Aggregates.Event.Values;
-using EventAssociation.Core.Domain.Aggregates.Events.Values;
 using EventAssociation.Core.Domain.Aggregates.Guests;
 using EventAssociation.Core.Domain.Aggregates.Guests.Values;
 using EventAssociation.Core.Domain.Aggregates.Locations;

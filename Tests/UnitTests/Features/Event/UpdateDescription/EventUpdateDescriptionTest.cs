@@ -5,7 +5,6 @@ using EventAssociation.Core.Domain.Aggregates.Locations.Values;
 
 namespace UnitTests.Features.Event.UpdateDescription;
 using Xunit;
-using EventAssociation.Core.Domain.Aggregates.Events.Values;
 using EventAssociation.Core.Domain.Aggregates.Event;
 using EventAssociation.Core.Tools.OperationResult;
 public class EventUpdateDescriptionTest

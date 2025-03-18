@@ -1,7 +1,7 @@
 ﻿using EventAssociation.Core.Domain.Common.Values;
 using EventAssociation.Core.Tools.OperationResult;
 
-namespace EventAssociation.Core.Domain.Aggregates.Events.Values;
+namespace EventAssociation.Core.Domain.Aggregates.Event.Values;
 
 public class EventDescription: ValueObject
 {

@@ -1,4 +1,4 @@
-namespace EventAssociation.Core.Domain.Aggregates.Events.Values;
+namespace EventAssociation.Core.Domain.Aggregates.Event.Values;
 
 public enum EventStatus
 {

@@ -1,6 +1,5 @@
 using EventAssociation.Core.Domain.Aggregates.Event.Bases;
 using EventAssociation.Core.Domain.Aggregates.Event.Values;
-using EventAssociation.Core.Domain.Aggregates.Events.Values;
 using EventAssociation.Core.Domain.Aggregates.Guests;
 using EventAssociation.Core.Domain.Aggregates.Locations;
 using EventAssociation.Core.Tools.OperationResult;
@@ -21,7 +20,7 @@ public class Event : AggregateRoot
 
     internal GuestList guestList;
 
-    private Event(EventId id, EventTitle title, EventDescription description, EventTime? startDate, EventTime? endDate,
+    public Event(EventId id, EventTitle title, EventDescription description, EventTime? startDate, EventTime? endDate,
         EventMaxParticipants maxParticipants, EventType type, EventStatus status, Location location)
     {
         this.Id = id;
@@ -221,7 +220,7 @@ public class Event : AggregateRoot
 
     public Result<None> ChangeTimes(EventTime startTime, EventTime endTime)
     {
-        if (Status == EventStatus.Active || Status == EventStatus.Cancelled)
+        if (Status is EventStatus.Active or EventStatus.Cancelled)
         {
             return Result<None>.Err(new Error("Code", "Active or Canceled events cannot be edited"));
         }
@@ -243,7 +242,7 @@ public class Event : AggregateRoot
         return Result<None>.Ok(None.Value);
     }
 
-    private Result<None> ValidateTimes(EventTime startTime, EventTime endTime)
+    private static Result<None> ValidateTimes(EventTime startTime, EventTime endTime)
     {
         if (!startTime.IsBefore(endTime).IsSuccess)
         {

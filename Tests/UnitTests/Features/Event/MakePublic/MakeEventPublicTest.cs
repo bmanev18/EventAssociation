@@ -1,11 +1,9 @@
 using EventAssociation.Core.Domain.Aggregates.Event.Values;
-using EventAssociation.Core.Domain.Aggregates.Events.Values;
 using EventAssociation.Core.Domain.Aggregates.Locations;
 using EventAssociation.Core.Domain.Aggregates.Locations.Values;
 
 namespace UnitTests.Features.Event.MakePublic;
 using EventAssociation.Core.Domain.Aggregates.Event;
-using EventAssociation.Core.Domain.Aggregates.Events.Values;
 
 public class MakeEventPublicTest
 {

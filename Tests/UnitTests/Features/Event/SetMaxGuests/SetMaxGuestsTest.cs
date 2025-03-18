@@ -1,7 +1,7 @@
 using EventAssociation.Core.Domain.Aggregates.Event.Values;
 
 namespace UnitTests.Features.Event.SetMaxGuests;
-using EventAssociation.Core.Domain.Aggregates.Events.Values;
+
 using EventAssociation.Core.Domain.Aggregates.Locations;
 using EventAssociation.Core.Domain.Aggregates.Locations.Values;
 using EventAssociation.Core.Domain.Aggregates.Event;

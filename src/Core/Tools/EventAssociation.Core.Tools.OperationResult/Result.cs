@@ -35,8 +35,10 @@ public class Result<T>
     public T Unwrap() =>
         IsSuccess ? _value! : throw new InvalidOperationException("Called Unwrap on an Err result.");
 
-    public List<Error> UnwrapErr() =>
-        !IsSuccess ? _errors! : throw new InvalidOperationException("Called UnwrapErr on an Ok result.");
+    public List<Error> UnwrapErr()
+    {
+        return !IsSuccess ? _errors! : throw new InvalidOperationException("Called UnwrapErr on an Ok result.");
+    }
 
     public bool HasErrors() => !IsSuccess && _errors is not null && _errors.Any();
     

@@ -5,7 +5,6 @@ using EventAssociation.Core.Domain.Aggregates.Locations.Values;
 namespace UnitTests.Features.Event.MakePrivate;
 
 using EventAssociation.Core.Domain.Aggregates.Event;
-using EventAssociation.Core.Domain.Aggregates.Events.Values;
 using Xunit;
 using EventAssociation.Core.Tools.OperationResult;
 

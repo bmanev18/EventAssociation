@@ -1,5 +1,5 @@
-﻿using EventAssociation.Core.Domain.Aggregates.Events.Values;
-using EventAssociation.Core.Domain.Aggregates.Guests;
+﻿using EventAssociation.Core.Domain.Aggregates.Guests;
+using EventAssociation.Core.Domain.Aggregates.Guests.Values;
 using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Domain.Aggregates.Event.Bases;

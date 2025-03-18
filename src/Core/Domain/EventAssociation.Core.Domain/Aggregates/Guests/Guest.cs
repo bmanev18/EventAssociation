@@ -1,4 +1,3 @@
-using EventAssociation.Core.Domain.Aggregates.Events.Values;
 using EventAssociation.Core.Domain.Aggregates.Guests.Contracts;
 using EventAssociation.Core.Domain.Aggregates.Guests.Values;
 using EventAssociation.Core.Tools.OperationResult;
