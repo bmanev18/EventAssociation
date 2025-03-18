@@ -63,5 +63,36 @@ public class Invitation: AggregateRoot
 
         return Result<Invitation>.Ok(new Invitation( invitationEventId, invitationGuestId, InvitationStatus.Extended));
     }
+    
+    public Result<None> AcceptInvitation(EventStatus eventStatus, bool isEventFull)
+    {
+        var errors = new List<Error>();
+        
+        if (eventStatus == EventStatus.Cancelled)
+        {
+            errors.Add(new Error("100", "Cancelled events cannot be joined."));
+        }
+        
+        if (eventStatus == EventStatus.Ready)
+        {
+            errors.Add(new Error("100", "Cannot join event yet, event is not active."));
+        }
+        
+        if (isEventFull)
+        {
+            errors.Add(new Error("100", "Cannot accept invitation, event is full."));
+        }
+        
+        if (errors.Any())
+        {
+            return Result<None>.Err(errors.ToArray());
+        }
+        
+        InvitationStatus = InvitationStatus.Accepted;
+        return Result<None>.Ok(None.Value);
+    }
+    
+    
+    
 
 }
