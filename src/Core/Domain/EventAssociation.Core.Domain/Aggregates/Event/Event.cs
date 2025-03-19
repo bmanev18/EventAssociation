@@ -132,7 +132,7 @@ public class Event : AggregateRoot
         {
             return eventIsReady;
         }
-        
+
         this.Status = EventStatus.Active;
         return Result<None>.Ok(None.Value);
     }
@@ -283,12 +283,12 @@ public class Event : AggregateRoot
         {
             return Result<None>.Err(new Error("100", "Cannot join an event that has already started."));
         }
-        
+
         if (Status != EventStatus.Active)
         {
             return Result<None>.Err(new Error("100", "Cannot register an inactive event"));
         }
-        
+
         if (Type != EventType.Public)
         {
             return Result<None>.Err(new Error("100", "You cannot join a private event. Only public events can be joined."));
@@ -298,7 +298,7 @@ public class Event : AggregateRoot
         {
             return Result<None>.Err(new Error("100", "There are no available spots in the guest list"));
         }
-        
+
         if (guestList.IsGuestAlreadyInList(guest))
         {
             return Result<None>.Err(new Error("100", "You are already registered to attend this event."));
@@ -319,7 +319,7 @@ public class Event : AggregateRoot
         {
             return Result<None>.Err(new Error("100", "You cannot withdraw from an active event."));
         }
-        
+
         guestList.RemoveGuest(guest);
         return Result<None>.Ok(None.Value);
     }
