@@ -105,21 +105,21 @@
   - [x] F1 - Event is active
 
 - Use Case 13: Guest is invited to event
-  - [ ] S1
-  - [ ] F1 – Event is draft or cancelled
-  - [ ] F2 – No more room
-  - [ ] F3 – Guest is already invited
-  - [ ] F4 – Guest is already participating
+  - [x] S1
+  - [x] F1 – Event is draft or cancelled
+  - [x] F2 – No more room
+  - [x] F3 – Guest is already invited
+  - [x] F4 – Guest is already participating
   
 - Use Case 14: Guest accepts invitation
-  - [ ] S1
-  - [ ] F1 – Invitation not found
-  - [ ] F2 – Too many guests
-  - [ ] F3 - Event is cancelled
-  - [ ] F4 – Event is ready
+  - [x] S1
+  - [ ] F1 – Invitation not found (Not in domain)
+  - [x] F2 – Too many guests
+  - [x] F3 - Event is cancelled
+  - [x] F4 – Event is ready
 
 - Use Case 15: Guest declines invitation
-  - [ ] S1
-  - [ ] S2
-  - [ ] F1 - Invitation not found
-  - [ ] F2 - Event is cancelled
+  - [x] S1
+  - [x] S2
+  - [ ] F1 - Invitation not found (Not in domain)
+  - [x] F2 - Event is cancelled
