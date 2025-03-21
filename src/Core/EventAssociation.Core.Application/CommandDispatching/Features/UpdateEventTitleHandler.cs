@@ -10,6 +10,8 @@ public class UpdateEventTitleHandler : ICommandHandler<UpdateEventTitleCommand>
     private readonly IEventRepository repository;
     private readonly IUnitOfWork uow;
 
+    internal UpdateEventTitleHandler(IEventRepository repository, IUnitOfWork uow) => (this.repository, this.uow) = (repository, uow);
+    
     public async Task<Result<None>> HandleAsync(UpdateEventTitleCommand command)
     {
         var getEvent = await repository.GetAsync(command.Id);
