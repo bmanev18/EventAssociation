@@ -1,4 +1,5 @@
-﻿using EventAssociation.Core.Domain.Common.Values;
+﻿using System.Dynamic;
+using EventAssociation.Core.Domain.Common.Values;
 using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Domain.Aggregates.Event.Values;
@@ -10,6 +11,21 @@ public class EventTime: ValueObject
     public EventTime(DateTime value)
     {
         Value = value;
+    }
+
+    public static Result<EventTime> Create(string time)
+    {
+        try
+        {
+            var result = DateTime.Parse(time);
+            var newTime = new EventTime(result);
+            return Result<EventTime>.Ok(newTime);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return Result<EventTime>.Err(new Error("Parse", e.Message));
+        }
     }
     public Result<None> IsBefore(EventTime other)
     {
