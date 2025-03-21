@@ -13,7 +13,7 @@ public class CreateEventCommand
     internal EventType Type { get; }
     internal Location Location_ { get; }
 
-    public CreateEventCommand(EventTime? startDate, EventTime? endDate, EventType type, Location location)
+    private CreateEventCommand(EventTime? startDate, EventTime? endDate, EventType type, Location location)
     {
         StartDate = startDate;
         EndDate = endDate;
