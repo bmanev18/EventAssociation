@@ -11,4 +11,8 @@
       <Folder Include="CommandDispatching\Features\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Tools\EventAssociation.Core.Tools.OperationResult\EventAssociation.Core.Tools.OperationResult.csproj" />
+    </ItemGroup>
+
 </Project>

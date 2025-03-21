@@ -1,6 +1,9 @@
-namespace EventAssociation.Core.Application.Commands_Handles;
+using EventAssociation.Core.Tools.OperationResult;
 
-public interface ICommandHandler
+namespace EventAssociation.Core.Application.CommandDispatching;
+
+public interface ICommandHandler<T>
 {
-    
+    public Task<Result<None>> HandleAsync(T command);
+
 }
