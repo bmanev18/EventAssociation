@@ -24,6 +24,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{1833BC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAssociation.Core.Domain", "src\Core\Domain\EventAssociation.Core.Domain\EventAssociation.Core.Domain.csproj", "{891D7AC0-DC12-47E2-93AF-45FB764F2255}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{B2E4D60E-3A89-4DF3-B599-5636048EBDA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAssociation.Core.Application", "src\Core\EventAssociation.Core.Application\EventAssociation.Core.Application.csproj", "{80F417C1-E848-4867-8F4A-A31A7D46FC85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,8 @@ Global
 		{1295B8D3-6805-4A60-B935-EC6117068E77} = {328F2B5E-C910-4563-AAFA-69FFD24774E6}
 		{1833BC9B-89DB-48F4-A775-5D7CCE7DD114} = {3E7D4C64-2778-4821-A8A2-2FCCB2FAD57F}
 		{891D7AC0-DC12-47E2-93AF-45FB764F2255} = {1833BC9B-89DB-48F4-A775-5D7CCE7DD114}
+		{B2E4D60E-3A89-4DF3-B599-5636048EBDA2} = {3E7D4C64-2778-4821-A8A2-2FCCB2FAD57F}
+		{80F417C1-E848-4867-8F4A-A31A7D46FC85} = {B2E4D60E-3A89-4DF3-B599-5636048EBDA2}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{06703580-EC31-4E71-B05E-78BA9B7A63A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -55,5 +61,9 @@ Global
 		{891D7AC0-DC12-47E2-93AF-45FB764F2255}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{891D7AC0-DC12-47E2-93AF-45FB764F2255}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{891D7AC0-DC12-47E2-93AF-45FB764F2255}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80F417C1-E848-4867-8F4A-A31A7D46FC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80F417C1-E848-4867-8F4A-A31A7D46FC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80F417C1-E848-4867-8F4A-A31A7D46FC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80F417C1-E848-4867-8F4A-A31A7D46FC85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
