@@ -8,17 +8,30 @@ public class UpdateEventTitleCommand
     internal EventId Id { get; }
     internal EventTitle Title { get; }
 
-    private UpdateEventTitleCommand(EventTitle title)
+    private UpdateEventTitleCommand(EventId id, EventTitle title)
     {
+        Id = id;
         Title = title;
     }
 
     public static Result<UpdateEventTitleCommand> Create(string id, string title)
     {
-        // new EventId();
         var result = EventTitle.CreateEventTitle(title);
-        return !result.IsSuccess
-            ? Result<UpdateEventTitleCommand>.Err(result.UnwrapErr().ToArray())
-            : Result<UpdateEventTitleCommand>.Ok(new UpdateEventTitleCommand(result.Unwrap()));
+        var validId = EventId.Create(id);
+        
+        var errors = new List<Error>();
+        if (!result.IsSuccess)
+        {
+            errors.AddRange(result.UnwrapErr());
+        }
+        else if (!validId.IsSuccess)
+        {
+            errors.AddRange(validId.UnwrapErr());
+        }else
+        {
+            return Result<UpdateEventTitleCommand>.Ok(new UpdateEventTitleCommand(validId.Unwrap(), result.Unwrap()));
+        }
+        
+        return Result<UpdateEventTitleCommand>.Err(errors.ToArray());
     }
 }

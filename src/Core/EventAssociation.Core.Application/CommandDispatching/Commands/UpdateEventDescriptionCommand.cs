@@ -10,17 +10,32 @@ public class UpdateEventDescriptionCommand
     internal EventId Id { get; }
     internal EventDescription Description { get; }
 
-    private UpdateEventDescriptionCommand(EventDescription description)
+    private UpdateEventDescriptionCommand(EventId id, EventDescription description)
     {
+        Id = id;
         Description = description;
     }
 
     public static Result<UpdateEventDescriptionCommand> Create(string id, string description)
     {
-        // new EventId();
         var result = EventDescription.CreateEventDescription(description);
-        return !result.IsSuccess
-            ? Result<UpdateEventDescriptionCommand>.Err(result.UnwrapErr().ToArray())
-            : Result<UpdateEventDescriptionCommand>.Ok(new UpdateEventDescriptionCommand(result.Unwrap()));
+        var validId = EventId.Create(id);
+
+        var errors = new List<Error>();
+        if (!result.IsSuccess)
+        {
+            errors.AddRange(result.UnwrapErr());
+        }
+        else if (!validId.IsSuccess)
+        {
+            errors.AddRange(validId.UnwrapErr());
+        }
+        else
+        {
+            return Result<UpdateEventDescriptionCommand>.Ok(
+                new UpdateEventDescriptionCommand(validId.Unwrap(), result.Unwrap()));
+        }
+
+        return Result<UpdateEventDescriptionCommand>.Err(errors.ToArray());
     }
 }

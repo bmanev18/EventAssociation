@@ -37,7 +37,7 @@ public class CreateEventCommand
             errors.AddRange(creatingStartDate.UnwrapErr());
         }else if (!creatingStartDate.IsSuccess)
         {
-            errors.AddRange(creatingStartDate.UnwrapErr());
+            errors.AddRange(creatingEndDate.UnwrapErr());
         }
         else if (!lName.IsSuccess)
         {
