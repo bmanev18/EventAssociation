@@ -34,6 +34,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Core\Domain\EventAssociation.Core.Domain\EventAssociation.Core.Domain.csproj" />
+      <ProjectReference Include="..\..\src\Core\EventAssociation.Core.Application\EventAssociation.Core.Application.csproj" />
     </ItemGroup>
 
 </Project>

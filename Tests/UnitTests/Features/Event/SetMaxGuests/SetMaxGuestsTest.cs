@@ -20,7 +20,7 @@ public class SetMaxGuestsTest
         var event_ = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
         
         // Act
-        var result = event_.UpdateMaxNumberOfParticipants(49);
+        var result = event_.UpdateMaxNumberOfParticipants(EventMaxParticipants.Create(49).Unwrap());
         
         // Assert
         Assert.False(result.IsSuccess);
@@ -49,12 +49,13 @@ public class SetMaxGuestsTest
         var setTimes = newEvent.ChangeTimes(new EventTime(startTime), new EventTime(endTime));
         Assert.True(setTimes.IsSuccess);
         
-        newEvent.UpdateMaxNumberOfParticipants(30);
+        
+        newEvent.UpdateMaxNumberOfParticipants(EventMaxParticipants.Create(30).Unwrap());
         newEvent.ChangeEventStatusToActive();
         Assert.Equal(EventStatus.Active, newEvent.Status);
     
         // Act
-        var result = newEvent.UpdateMaxNumberOfParticipants(20);
+        var result = newEvent.UpdateMaxNumberOfParticipants(EventMaxParticipants.Create(20).Unwrap());
     
         // Assert
         Assert.False(result.IsSuccess);
@@ -72,9 +73,11 @@ public class SetMaxGuestsTest
         var event_ = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
         event_.ChangeEventStatusToCancelled();
         
+        var newMaxNumberOfParticipants = EventMaxParticipants.Create(40).Unwrap();
+        
         
         // Act
-        var result = event_.UpdateMaxNumberOfParticipants(40);
+        var result = event_.UpdateMaxNumberOfParticipants(newMaxNumberOfParticipants);
     
         // Assert
         Assert.False(result.IsSuccess);
@@ -91,7 +94,7 @@ public class SetMaxGuestsTest
         var event_ = Event.CreateEvent(location, EventType.Private, null, null).Unwrap();
     
         // Act
-        var result = event_.UpdateMaxNumberOfParticipants(40);
+        var result = event_.UpdateMaxNumberOfParticipants(EventMaxParticipants.Create(40).Unwrap());
     
         // Assert
         Assert.True(result.IsSuccess);
