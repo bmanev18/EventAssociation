@@ -20,12 +20,12 @@ public class MakeEventPublicHandler : ICommandHandler<MakeEventPublicCommand>
 
         var changeEventTypeToPublic = getEvent.Unwrap().ChangeEventTypeToPublic();
 
-        if (changeEventTypeToPublic.IsSuccess)
+        if (!changeEventTypeToPublic.IsSuccess)
         {
-            return changeEventTypeToPublic;
+            return Result<None>.Err(changeEventTypeToPublic.UnwrapErr().ToArray());
         }
 
         await uow.SaveChangesAsync();
-        return Result<None>.Err(changeEventTypeToPublic.UnwrapErr().ToArray());
+        return changeEventTypeToPublic;
     }
 }

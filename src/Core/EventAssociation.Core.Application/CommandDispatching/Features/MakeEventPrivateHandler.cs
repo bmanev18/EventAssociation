@@ -19,12 +19,12 @@ public class MakeEventPrivateHandler : ICommandHandler<MakeEventPrivateCommand>
 
         var changeEventTypeToPrivate = getEvent.Unwrap().ChangeEventTypeToPrivate();
 
-        if (changeEventTypeToPrivate.IsSuccess)
+        if (!changeEventTypeToPrivate.IsSuccess)
         {
-            return changeEventTypeToPrivate;
+            return Result<None>.Err(changeEventTypeToPrivate.UnwrapErr().ToArray());
         }
 
         await uow.SaveChangesAsync();
-        return Result<None>.Err(changeEventTypeToPrivate.UnwrapErr().ToArray());
+        return changeEventTypeToPrivate;
     }
 }

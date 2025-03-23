@@ -18,13 +18,13 @@ public class CreateEventHandler: ICommandHandler<CreateEventCommand>
         var event_ = Event.CreateEvent(command.Location_, command.Type, command.StartDate, command.EndDate);
         if (!event_.IsSuccess)
         {
-            return Result<None>.Err(new Error("Handler", "Event could not be created"));
+            return Result<None>.Err(event_.UnwrapErr().ToArray());
         }
 
-        var a = await repository.CreateAsync(event_.Unwrap());
-        if (!a.IsSuccess)
+        var creatingInRepository = await repository.CreateAsync(event_.Unwrap());
+        if (!creatingInRepository.IsSuccess)
         {
-            return Result<None>.Err(new Error("Repository", "Event not saved in Repository"));
+            return Result<None>.Err(creatingInRepository.UnwrapErr().ToArray());
  
         }
 
