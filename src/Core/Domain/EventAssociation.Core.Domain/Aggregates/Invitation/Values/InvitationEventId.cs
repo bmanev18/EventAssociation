@@ -1,4 +1,5 @@
-﻿using EventAssociation.Core.Domain.Common.Values;
+﻿using EventAssociation.Core.Domain.Aggregates.Event.Values;
+using EventAssociation.Core.Domain.Common.Values;
 
 namespace EventAssociation.Core.Domain.Aggregates.Invitation;
 
@@ -16,4 +17,10 @@ public class InvitationEventId : ValueObject
     {
         yield return Value;
     }
+    
+    public static implicit operator EventId(InvitationEventId invitationEventId)
+    {
+        return new EventId(invitationEventId.Value);
+    }
+
 }
