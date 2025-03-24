@@ -20,34 +20,32 @@ public class CreateInvitationHandler : ICommandHandler<CreateInvitationCommand>
     
     public async Task<Result<None>> HandleAsync(CreateInvitationCommand command)
     {
-        // var eventId = EventId.Create(command.InvitationEventId.Value.ToString()).Unwrap(); 
         var eventExists = _eventRepository.GetAsync(command.InvitationEventId);//  _eventRepository.GetAsync(eventId);
         if (!eventExists.Result.IsSuccess)
         {
             return Result<None>.Err(new Error("100", "Event does not exist."));
         }
-
-        //var guestId = new GuestId(command.InvitationGuestId); //TODO: DISCUSS PUBLIC ATTRIBUTE
+        
         var guestExists = _guestRepository.GetAsync((GuestId)command.InvitationGuestId);
         if (!guestExists.Result.IsSuccess)
         {
             return Result<None>.Err(new Error("100", "Guest does not exist."));
         }
 
+        //TODO: Change following checks to work when EFC figured out and guestlist has limit
+        //bool isAlreadyInvited = _invitationRepository.IsGuestAlreadyInvited(command.InvitationEventId, command.InvitationGuestId).Result.Unwrap();
+        bool isAlreadyParticipating = eventExists.Result.Unwrap().IsGuestInGuestlist(guestExists.Result.Unwrap());
+        //bool isEventFull = _invitationRepository.IsEventFull(command.InvitationEventId).Result.Unwrap();
         
-        bool isAlreadyInvited = _invitationRepository.IsGuestAlreadyInvited(command.InvitationEventId, command.InvitationGuestId).Result.Unwrap();
-        bool isAlreadyParticipating = _invitationRepository.IsGuestParticipating(command.InvitationEventId, command.InvitationGuestId).Result.Unwrap();
-        bool isEventFull = _invitationRepository.IsEventFull(command.InvitationEventId).Result.Unwrap();
-        
-        EventStatus eventStatus = eventExists.Result.Unwrap().Status; //TODO: REPLACE WITH METHOD INSTEAD OF PUBLIC ?
+        EventStatus eventStatus = eventExists.Result.Unwrap().GetEventStatus(); 
         
         var invitation = Invitation.Create(
             command.InvitationEventId,
             command.InvitationGuestId,
             eventStatus,
-            isAlreadyInvited,
+            false,
             isAlreadyParticipating,
-            isEventFull
+            false
         );
 
         if (!invitation.IsSuccess)

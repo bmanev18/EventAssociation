@@ -40,16 +40,23 @@ using EventAssociation.Core.Tools.OperationResult;
 // var result = newEvent.RegisterGuestToEvent(guest);
 // Console.WriteLine(result.IsSuccess);
 // Using a valid GUID string
-string validGuid = "3F2504E0-4F89-41D3-9A0C-0305E82C3301";
+// string validGuid = "3F2504E0-4F89-41D3-9A0C-0305E82C3301";
+//
+// // Creating an EventId with the GUID string
+// EventId eventId = EventId.Create(validGuid).Unwrap();
+//
+// // Assigning eventId to InvitationEventId (assuming implicit conversion is allowed)
+// InvitationEventId invitationEventId = eventId;
+//
+// // Printing out the values
+// Console.WriteLine(eventId.ToString());
+// Console.WriteLine(invitationEventId.ToString());
 
-// Creating an EventId with the GUID string
-EventId eventId = EventId.Create(validGuid).Unwrap();
+InvitationGuestId invitationGuestId = new InvitationGuestId(new Guid());
+GuestId guestId = (GuestId)invitationGuestId;
 
-// Assigning eventId to InvitationEventId (assuming implicit conversion is allowed)
-InvitationEventId invitationEventId = eventId;
+Console.WriteLine(guestId);
 
-// Printing out the values
-Console.WriteLine(eventId.ToString());
-Console.WriteLine(invitationEventId.ToString());
+
 
 

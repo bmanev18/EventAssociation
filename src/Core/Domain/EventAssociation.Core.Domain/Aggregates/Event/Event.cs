@@ -323,4 +323,14 @@ public class Event : AggregateRoot
         guestList.RemoveGuest(guest);
         return Result<None>.Ok(None.Value);
     }
+
+    public bool IsGuestInGuestlist(Guest guest)
+    {
+        return guestList.IsGuestAlreadyInList(guest);
+    }
+    
+    public EventStatus GetEventStatus()
+    {
+        return Status;
+    }
 }
