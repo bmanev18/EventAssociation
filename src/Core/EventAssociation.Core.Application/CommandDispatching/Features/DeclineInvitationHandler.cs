@@ -6,13 +6,14 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Features;
 
-public class AcceptInvitationHandler : ICommandHandler<AcceptInvitationCommand>
+public class DeclineInvitationHandler : ICommandHandler<DeclineInvitationCommand>
 {
     private readonly IInvitatonRepository _repository;
     private readonly IEventRepository _repositoryEvent;
     private readonly IUnitOfWork uow;
     
-    public async Task<Result<None>> HandleAsync(AcceptInvitationCommand command)
+    
+    public async Task<Result<None>> HandleAsync(DeclineInvitationCommand command)
     {
         var invitation = _repository.GetAsync(command._InvitationId);
         if (!invitation.Result.IsSuccess)
@@ -26,17 +27,16 @@ public class AcceptInvitationHandler : ICommandHandler<AcceptInvitationCommand>
         }
         
         //TODO: Change following checks to work when EFC figured out and guestlist has limit and to save to guest list
-        //bool isEventFull = _invitationRepository.IsEventFull(command.InvitationEventId).Result.Unwrap();
 
-        var acceptInvitation = invitation.Result.Unwrap()
-            .AcceptInvitation(invitationEvent.Result.Unwrap().GetEventStatus(), false);
+        var declineInvitation = invitation.Result.Unwrap()
+            .DeclineInvitation(invitationEvent.Result.Unwrap().GetEventStatus());
 
-        if (!acceptInvitation.IsSuccess)
+        if (!declineInvitation.IsSuccess)
         {
-            return Result<None>.Err(acceptInvitation.UnwrapErr().ToArray());
+            return Result<None>.Err(declineInvitation.UnwrapErr().ToArray());
         }
 
         await uow.SaveChangesAsync();
-        return acceptInvitation;
+        return declineInvitation;
     }
 }
