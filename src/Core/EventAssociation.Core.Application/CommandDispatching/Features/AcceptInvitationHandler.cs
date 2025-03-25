@@ -12,11 +12,31 @@ public class AcceptInvitationHandler : ICommandHandler<AcceptInvitationCommand>
     private readonly IEventRepository _repositoryEvent;
     private readonly IUnitOfWork uow;
     
-    public Task<Result<None>> HandleAsync(AcceptInvitationCommand command)
+    public async Task<Result<None>> HandleAsync(AcceptInvitationCommand command)
     {
-        //use event repository by getting event status and isfull from eventid taken from
-        // Inivitation taken from invitation repository from command.InvitationId
-     
-        throw new NotImplementedException();
+        var invitation = _repository.GetAsync(command._InvitationId);
+        if (!invitation.Result.IsSuccess)
+        {
+            return Result<None>.Err(new Error("100", "Invitation does not exist."));
+        }
+        var invitationEvent = _repositoryEvent.GetAsync(invitation.Result.Unwrap().GetInvitationEventId());
+        if (!invitationEvent.Result.IsSuccess)
+        {
+            return Result<None>.Err(new Error("100", "Event for invitation does not exist."));
+        }
+        
+        //TODO: Change following checks to work when EFC figured out and guestlist has limit and to save to guest list
+        //bool isEventFull = _invitationRepository.IsEventFull(command.InvitationEventId).Result.Unwrap();
+
+        var acceptInvitation = invitation.Result.Unwrap()
+            .AcceptInvitation(invitationEvent.Result.Unwrap().GetEventStatus(), false);
+
+        if (!acceptInvitation.IsSuccess)
+        {
+            return Result<None>.Err(acceptInvitation.UnwrapErr().ToArray());
+        }
+
+        return acceptInvitation;
+        
     }
 }
