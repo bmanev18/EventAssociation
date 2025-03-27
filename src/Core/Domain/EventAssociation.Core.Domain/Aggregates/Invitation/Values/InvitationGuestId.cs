@@ -1,4 +1,5 @@
-﻿using EventAssociation.Core.Domain.Common.Values;
+﻿using EventAssociation.Core.Domain.Aggregates.Guests.Values;
+using EventAssociation.Core.Domain.Common.Values;
 
 namespace EventAssociation.Core.Domain.Aggregates.Invitation;
 
@@ -15,5 +16,10 @@ public class InvitationGuestId : ValueObject
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;
+    }
+    
+    public static explicit operator GuestId(InvitationGuestId invitationGuestId)
+    {
+        return new GuestId(invitationGuestId.Value);
     }
 }

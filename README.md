@@ -81,7 +81,7 @@
   - [x] F1 - Event is draft
   - [x] F2 - Event is cancelled
       
-- Use Case 10: An anonymous user (aka Anon) registers a new Guest accoun
+- Use Case 10: An anonymous user (aka Anon) registers a new Guest account
   - [x] S1
   - [x] F1 – Email domain incorrect
   - [x] F2 – Email format incorrect
@@ -91,7 +91,7 @@
   - [x] F6 – Names contain non-letter characters
   - [x] F7 – URL invalid format
     
-- Use Case 11: Guest participates public event
+- Use Case 11: Guest participates public event **//<!-TODO-Waiting for EFC-->**
   - [x] S1
   - [x] F1 – Event not active
   - [x] F2 – No more room
@@ -99,12 +99,12 @@
   - [x] F4 – Cannot join private event
   - [x] F5 – Guest is already participating
     
-- Use Case 12: Guest cancels event participation
+- Use Case 12: Guest cancels event participation  **//<!-TODO-Waiting for EFC-->** 
   - [x] S1
   - [x] S2
   - [x] F1 - Event is active
 
-- Use Case 13: Guest is invited to event
+- Use Case 13: Guest is invited to event 
   - [x] S1
   - [x] F1 – Event is draft or cancelled
   - [x] F2 – No more room

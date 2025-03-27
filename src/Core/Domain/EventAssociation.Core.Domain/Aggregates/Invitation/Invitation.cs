@@ -109,5 +109,10 @@ public class Invitation: AggregateRoot
         InvitationStatus = InvitationStatus.Rejected;
         return Result<None>.Ok(None.Value);
     }
+
+    public InvitationEventId GetInvitationEventId()
+    {
+        return InvitationEventId;
+    }
     
 }

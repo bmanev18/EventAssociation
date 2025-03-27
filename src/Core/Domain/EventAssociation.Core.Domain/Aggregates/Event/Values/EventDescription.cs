@@ -7,7 +7,7 @@ public class EventDescription: ValueObject
 {
     internal string Description { get; }
     
-    private EventDescription(string description)//TODO-Change to private
+    private EventDescription(string description)
     {
         Description = description;
     }

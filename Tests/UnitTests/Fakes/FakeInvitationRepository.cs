@@ -53,5 +53,20 @@ namespace UnitTests.Fakes
             }
             return Task.FromResult(Result<None>.Err(new Error("", "Invitation not found")));
         }
+
+        public Task<Result<bool>> IsGuestAlreadyInvited(InvitationEventId eventId, InvitationGuestId guestId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result<bool>> IsGuestParticipating(InvitationEventId eventId, InvitationGuestId guestId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result<bool>> IsEventFull(InvitationEventId eventId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -5,7 +5,7 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Features;
 
-public class UpdateEventDescriptionHandler
+public class UpdateEventDescriptionHandler : ICommandHandler<UpdateEventDescriptionCommand>
 {
     private readonly IEventRepository repository;
     private readonly IUnitOfWork uow;
