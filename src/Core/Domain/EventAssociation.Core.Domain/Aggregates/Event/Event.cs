@@ -95,11 +95,11 @@ public class Event : AggregateRoot
         }
     }
 
-    public Result<None> UpdateMaxNumberOfParticipants(int maxParticipants)
+    public Result<None> UpdateMaxNumberOfParticipants(EventMaxParticipants maxParticipants)
     {
         if (Status == EventStatus.Active)
         {
-            if (maxParticipants < MaxParticipants.Value)
+            if (maxParticipants.Value < MaxParticipants.Value)
             {
                 return Result<None>.Err(new Error("100",
                     "Cannot reduce the max participants for an active event, it can only be increased"));
@@ -112,13 +112,13 @@ public class Event : AggregateRoot
                 "Cannot modify the max participants for a cancelled event"));
         }
 
-        if (Location.LocationCapacity.Value < maxParticipants)
+        if (Location.LocationCapacity.Value < maxParticipants.Value)
         {
             return Result<None>.Err(new Error(" ",
                 "Cannot have more participants than the maximum capacity allowed by the location."));
         }
 
-        var updatedMaxParticipants = EventMaxParticipants.Create(maxParticipants).Unwrap();
+        var updatedMaxParticipants = EventMaxParticipants.Create(maxParticipants.Value).Unwrap();
         this.MaxParticipants = updatedMaxParticipants;
         return Result<None>.Ok(None.Value);
     }
