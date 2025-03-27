@@ -11,8 +11,15 @@ public class DeclineInvitationHandler : ICommandHandler<DeclineInvitationCommand
     private readonly IInvitatonRepository _repository;
     private readonly IEventRepository _repositoryEvent;
     private readonly IUnitOfWork uow;
-    
-    
+
+    public DeclineInvitationHandler(IInvitatonRepository repository, IEventRepository repositoryEvent, IUnitOfWork uow)
+    {
+        _repository = repository;
+        _repositoryEvent = repositoryEvent;
+        this.uow = uow;
+    }
+
+
     public async Task<Result<None>> HandleAsync(DeclineInvitationCommand command)
     {
         var invitation = _repository.GetAsync(command._InvitationId);

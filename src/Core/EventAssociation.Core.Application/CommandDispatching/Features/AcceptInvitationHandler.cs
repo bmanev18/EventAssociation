@@ -11,7 +11,14 @@ public class AcceptInvitationHandler : ICommandHandler<AcceptInvitationCommand>
     private readonly IInvitatonRepository _repository;
     private readonly IEventRepository _repositoryEvent;
     private readonly IUnitOfWork uow;
-    
+
+    public AcceptInvitationHandler(IInvitatonRepository repository, IEventRepository repositoryEvent, IUnitOfWork uow)
+    {
+        _repository = repository;
+        _repositoryEvent = repositoryEvent;
+        this.uow = uow;
+    }
+
     public async Task<Result<None>> HandleAsync(AcceptInvitationCommand command)
     {
         var invitation = _repository.GetAsync(command._InvitationId);

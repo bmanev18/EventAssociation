@@ -15,9 +15,16 @@ public class CreateInvitationHandler : ICommandHandler<CreateInvitationCommand>
     private readonly IEventRepository _eventRepository;
     private readonly IGuestRepository _guestRepository;
     private readonly IUnitOfWork uow;
-    
-    
-    
+
+    public CreateInvitationHandler(IInvitatonRepository invitationRepository, IEventRepository eventRepository, IGuestRepository guestRepository, IUnitOfWork uow)
+    {
+        _invitationRepository = invitationRepository;
+        _eventRepository = eventRepository;
+        _guestRepository = guestRepository;
+        this.uow = uow;
+    }
+
+
     public async Task<Result<None>> HandleAsync(CreateInvitationCommand command)
     {
         var eventExists = _eventRepository.GetAsync(command.InvitationEventId);//  _eventRepository.GetAsync(eventId);
