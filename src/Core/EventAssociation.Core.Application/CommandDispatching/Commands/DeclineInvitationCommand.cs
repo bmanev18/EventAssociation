@@ -3,7 +3,7 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Commands;
 
-public class DeclineInvitationCommand
+public class DeclineInvitationCommand : ICommand
 {
     internal InvitationId _InvitationId { get; }
 

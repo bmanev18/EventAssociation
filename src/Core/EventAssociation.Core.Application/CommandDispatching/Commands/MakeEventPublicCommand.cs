@@ -3,7 +3,7 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Commands;
 
-public class MakeEventPublicCommand
+public class MakeEventPublicCommand : ICommand
 {
     internal EventId Id { get; }
 

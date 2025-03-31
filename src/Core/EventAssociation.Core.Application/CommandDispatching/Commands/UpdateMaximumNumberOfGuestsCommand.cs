@@ -3,7 +3,7 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Commands;
 
-public class UpdateMaximumNumberOfGuestsCommand
+public class UpdateMaximumNumberOfGuestsCommand : ICommand
 {
     internal EventId Id { get; }
     internal EventMaxParticipants MaxParticipants { get; }

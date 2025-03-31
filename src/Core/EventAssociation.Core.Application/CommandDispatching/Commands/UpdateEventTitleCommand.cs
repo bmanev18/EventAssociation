@@ -3,7 +3,7 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Commands;
 
-public class UpdateEventTitleCommand
+public class UpdateEventTitleCommand : ICommand
 {
     internal EventId Id { get; }
     internal EventTitle Title { get; }

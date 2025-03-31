@@ -4,7 +4,7 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Commands;
 
-public class UpdateEventTimesCommand
+public class UpdateEventTimesCommand : ICommand
 {
     internal EventId Id { get; }
     internal EventTime? StartDate { get; }

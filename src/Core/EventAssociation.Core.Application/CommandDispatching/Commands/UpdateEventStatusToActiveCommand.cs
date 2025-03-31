@@ -4,7 +4,7 @@ using EventAssociation.Core.Tools.OperationResult;
 namespace EventAssociation.Core.Application.CommandDispatching.Commands;
 
 
-public class UpdateEventStatusToActiveCommand
+public class UpdateEventStatusToActiveCommand : ICommand
 {
     internal EventId Id { get; }
 

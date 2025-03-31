@@ -5,7 +5,7 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Commands;
 
-public class UpdateEventDescriptionCommand
+public class UpdateEventDescriptionCommand : ICommand
 {
     internal EventId Id { get; }
     internal EventDescription Description { get; }
