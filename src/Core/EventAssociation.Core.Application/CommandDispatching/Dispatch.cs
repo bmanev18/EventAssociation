@@ -1,33 +1,32 @@
 ﻿using EventAssociation.Core.Tools.OperationResult;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace EventAssociation.Core.Application.CommandDispatching;
 
 public class Dispatch : ICommandDispatcher
 {
-    //TODO: Need to fix setup required in promgram.cs for webapi (services.AddScoped/Decorate)
-    /*
-      services.Scan(scan => scan
-    .FromAssembliesOf(typeof(DeclineInvitationHandler))  // The type of any of your handlers
-    .AddClasses(classes => classes.AssignableTo(typeof(ICommandHandler<>)))
-    .AsImplementedInterfaces()
-    .WithScopedLifetime());
-     */
-    private readonly IServiceProvider _serviceProvider;
+    private readonly Dictionary<Type, object> _handlers;
+    private readonly ILogger<ICommandDispatcher>? _logger;
 
-    public Dispatch(IServiceProvider serviceProvider)
+    public Dispatch(IEnumerable<object> handlers, ILogger<ICommandDispatcher>? logger = null)
     {
-        _serviceProvider = serviceProvider;
+        _logger = logger;
+        _handlers = handlers.ToDictionary(handler => handler.GetType().GetInterfaces()
+            .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICommandHandler<>))
+            .GetGenericArguments()[0], handler => handler);
     }
 
     public async Task<Result<None>> DispatchAsync<TCommand>(TCommand command)
     {
-        var handler = _serviceProvider.GetService(typeof(ICommandHandler<TCommand>)) as ICommandHandler<TCommand>;
-
-        if (handler == null)
+        if (_handlers.TryGetValue(typeof(TCommand), out var handlerObj) &&
+            handlerObj is ICommandHandler<TCommand> handler)
         {
-            return Result<None>.Err(new Error("100", $"No handler found for command {typeof(TCommand).Name}"));
+            return await handler.HandleAsync(command);
         }
 
-        return await handler.HandleAsync(command);
+        var errorMsg = $"No handler found for command {typeof(TCommand).Name}";
+        _logger?.LogError(errorMsg);
+        return Result<None>.Err(new Error("100", errorMsg));
     }
 }
