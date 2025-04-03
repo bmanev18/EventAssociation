@@ -4,7 +4,7 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Features;
 
-public class MakeEventPrivateCommand
+public class MakeEventPrivateCommand : ICommand
 {
     internal EventId Id { get; }
 

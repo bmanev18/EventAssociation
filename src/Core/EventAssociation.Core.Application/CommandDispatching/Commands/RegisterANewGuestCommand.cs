@@ -3,7 +3,7 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Commands;
 
-public class RegisterANewGuestCommand
+public class RegisterANewGuestCommand : ICommand
 {
     internal GuestName guestName;
     internal GuestVIAEmail email;

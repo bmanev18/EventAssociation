@@ -6,7 +6,7 @@ using EventAssociation.Core.Tools.OperationResult;
 
 namespace EventAssociation.Core.Application.CommandDispatching.Commands;
 
-public class CreateEventCommand
+public class CreateEventCommand : ICommand
 {
     internal EventTime? StartDate { get; }
     internal EventTime? EndDate { get; }
