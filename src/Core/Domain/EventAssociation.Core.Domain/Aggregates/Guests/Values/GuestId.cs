@@ -5,13 +5,14 @@ namespace EventAssociation.Core.Domain.Aggregates.Guests.Values;
 
 public class GuestId: ValueObject
 {
-    private Guid Value { get; }
+    public Guid Value { get; }
     
-    public GuestId(Guid value)
-    {
-        Value = value;
-    }
+    private GuestId(Guid guid) => Value = guid;
+    
+    public static GuestId Create() => new GuestId(Guid.NewGuid());
 
+    
+    public static GuestId FromGuid(Guid guid) => new GuestId(guid);
 
     protected override IEnumerable<object> GetEqualityComponents()
     {

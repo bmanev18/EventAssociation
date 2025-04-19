@@ -6,6 +6,8 @@ namespace EventAssociation.Core.Domain.Aggregates.Locations.Values;
 public class LocationCapacity: ValueObject
 {
     public int Value { get; private set; }
+    
+    private LocationCapacity(){}
 
     private LocationCapacity(int value)
     {

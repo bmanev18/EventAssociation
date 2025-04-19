@@ -5,14 +5,14 @@ namespace EventAssociation.Core.Domain.Aggregates.Locations;
 
 public class Location: AggregateRoot
 {
-    internal LocationId Id { get; private set; }
+    public LocationId Id { get; private set; }
     internal LocationType LocationType { get; private set; }
-    internal LocationName LocationName { get; private set; }
+    public LocationName LocationName { get; private set; }
     internal LocationCapacity LocationCapacity { get; private set; }
 
     private Location(LocationType locationType, LocationName locationName, LocationCapacity locationCapacity)
     {
-        Id = new LocationId(Guid.NewGuid());
+        Id = LocationId.FromGuid(Guid.NewGuid());
         LocationType = locationType;
         LocationName = locationName;
         LocationCapacity = locationCapacity;
@@ -24,5 +24,5 @@ public class Location: AggregateRoot
         return Result<Location>.Ok(result);
     }
     
-    
+    private Location() { }
 }

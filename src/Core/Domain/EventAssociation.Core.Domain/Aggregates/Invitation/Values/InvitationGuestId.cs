@@ -20,6 +20,6 @@ public class InvitationGuestId : ValueObject
     
     public static explicit operator GuestId(InvitationGuestId invitationGuestId)
     {
-        return new GuestId(invitationGuestId.Value);
+        return GuestId.FromGuid(invitationGuestId.Value);
     }
 }

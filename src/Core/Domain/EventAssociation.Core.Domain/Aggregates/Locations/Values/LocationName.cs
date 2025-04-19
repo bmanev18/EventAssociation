@@ -5,8 +5,9 @@ namespace EventAssociation.Core.Domain.Aggregates.Locations.Values;
 
 public class LocationName : ValueObject
 {
-    private string Value { get; }
+    public string Value { get; private set; }
 
+    private LocationName(){}
 
     private LocationName(string value)
     {

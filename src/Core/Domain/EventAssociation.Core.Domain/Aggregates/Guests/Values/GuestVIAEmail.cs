@@ -6,7 +6,12 @@ namespace EventAssociation.Core.Domain.Aggregates.Guests.Values;
 
 public class GuestVIAEmail: ValueObject
 {
-    internal string Value { get; }
+    public string Value { get; }
+
+    private GuestVIAEmail()
+    {
+        
+    }
     
     private GuestVIAEmail(string value)
     {
