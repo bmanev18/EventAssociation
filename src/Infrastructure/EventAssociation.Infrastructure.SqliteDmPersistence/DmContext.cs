@@ -1,5 +1,7 @@
 using EventAssociation.Core.Domain.Aggregates.Guests;
 using EventAssociation.Core.Domain.Aggregates.Guests.Values;
+using EventAssociation.Core.Domain.Aggregates.Locations;
+using EventAssociation.Core.Domain.Aggregates.Locations.Values;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,11 +10,49 @@ namespace EventAssociation.Infrastructure.SqliteDmPersistence;
 public class DmContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<Guest> Guests => Set<Guest>();
+    public DbSet<Location> Locations => Set<Location>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         ConfigureGuest(modelBuilder.Entity<Guest>());
+        ConfigureLocation(modelBuilder.Entity<Location>());
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DmContext).Assembly);
+    }
+
+    private void ConfigureLocation(EntityTypeBuilder<Location> builder)
+    {
+        builder.HasKey(x => x.Id);
+        
+        builder
+            .Property(m => m.Id)
+            .HasConversion(
+                mId => mId.Value,
+                dbValue => LocationId.FromGuid(dbValue)
+            );
+        
+        builder.Property<LocationType>("status")
+            .HasConversion(
+                status => status.ToString(), 
+                value => (LocationType)Enum.Parse(typeof(LocationType), value)
+            );
+        
+        builder.ComplexProperty<LocationName>(
+            "LocationName",
+            propBuilder =>
+            {
+                propBuilder.Property(vo => vo.Value)
+                    .HasColumnName("LocationName");
+            }
+        );
+        
+        builder.ComplexProperty<LocationCapacity>(
+            "LocationCapacity",
+            propBuilder =>
+            {
+                propBuilder.Property(vo => vo.Value)
+                    .HasColumnName("LocationCapacity");
+            }
+        );
     }
 
     private void ConfigureGuest(EntityTypeBuilder<Guest> builder)
