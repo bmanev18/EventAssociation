@@ -1,3 +1,5 @@
+using EventAssociation.Core.Domain.Aggregates.Event;
+using EventAssociation.Core.Domain.Aggregates.Event.Values;
 using EventAssociation.Core.Domain.Aggregates.Guests;
 using EventAssociation.Core.Domain.Aggregates.Guests.Values;
 using EventAssociation.Core.Domain.Aggregates.Locations;
@@ -12,11 +14,26 @@ public class DmContext(DbContextOptions options) : DbContext(options)
     public DbSet<Guest> Guests => Set<Guest>();
     public DbSet<Location> Locations => Set<Location>();
     
+    public DbSet<Event> Events => Set<Event>();
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         ConfigureGuest(modelBuilder.Entity<Guest>());
         ConfigureLocation(modelBuilder.Entity<Location>());
+        ConfigureEvent(modelBuilder.Entity<Event>());
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DmContext).Assembly);
+    }
+
+    private void ConfigureEvent(EntityTypeBuilder<Event> builder)
+    {
+        builder.HasKey(x => x.Id);
+        
+        builder
+            .Property(m => m.Id)
+            .HasConversion(
+                mId => mId.Value,
+                dbValue => EventId.FromGuid(dbValue)
+            );
     }
 
     private void ConfigureLocation(EntityTypeBuilder<Location> builder)
