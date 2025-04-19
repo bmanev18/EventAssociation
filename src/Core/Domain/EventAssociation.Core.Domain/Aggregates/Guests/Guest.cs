@@ -6,10 +6,15 @@ namespace EventAssociation.Core.Domain.Aggregates.Guests;
 
 public class Guest: AggregateRoot
 {
-    internal GuestId id;
-    internal GuestName name;
-    internal GuestVIAEmail email;
-    internal GuestImageUrl image;
+    public GuestId id { get; }
+    public GuestName name;
+    public GuestVIAEmail email;
+    public GuestImageUrl image;
+
+    private Guest()
+    {
+        
+    }
 
 
     private Guest(GuestId id, GuestName name, GuestVIAEmail email, GuestImageUrl image)
@@ -22,7 +27,7 @@ public class Guest: AggregateRoot
 
     public static Result<Guest> Create(GuestName name, GuestVIAEmail email, GuestImageUrl image, IEmailChecker emailChecker)
     {
-        var guestId = new GuestId(Guid.NewGuid());
+        var guestId = GuestId.FromGuid(Guid.NewGuid());
         var result = emailChecker.IsEmailUnique(email.Value);
         if (!result.Result)
         {
