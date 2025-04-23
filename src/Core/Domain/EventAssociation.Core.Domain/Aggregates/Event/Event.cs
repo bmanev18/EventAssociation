@@ -14,9 +14,9 @@ public class Event : AggregateRoot
     internal EventTime? StartDate { get; private set; }
     internal EventTime? EndDate { get; private set; }
     internal EventMaxParticipants MaxParticipants { get; private set; }
-    internal EventType Type { get; private set; }
-    public EventStatus Status { get; private set; }
-    internal Location Location { get; private set; }
+    internal EventType Type { get; private set; } //internal
+    public EventStatus Status { get; private set; } 
+    internal Location Location { get; private set; } //internal
 
     internal GuestList guestList;
 

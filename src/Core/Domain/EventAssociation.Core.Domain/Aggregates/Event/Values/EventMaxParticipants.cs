@@ -5,7 +5,7 @@ namespace EventAssociation.Core.Domain.Aggregates.Event.Values;
 
     public class EventMaxParticipants: ValueObject
     {
-        internal int Value { get;}
+        public int Value { get;} //internal
         private EventMaxParticipants(int value)
         {
             Value = value;

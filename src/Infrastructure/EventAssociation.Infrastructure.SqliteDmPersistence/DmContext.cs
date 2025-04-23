@@ -34,6 +34,62 @@ public class DmContext(DbContextOptions options) : DbContext(options)
                 mId => mId.Value,
                 dbValue => EventId.FromGuid(dbValue)
             );
+        
+        builder
+            .HasOne<Location>("Location")
+            .WithMany()
+            .HasForeignKey("LocationId")
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder
+            .Property<LocationId>("LocationId")
+            .HasConversion(
+                id => id.Value,
+                value => LocationId.FromGuid(value)
+            );
+
+        builder
+            .Property(e => e.Title)
+            .HasConversion(
+                titleVo =>  titleVo.Title,
+                title => EventTitle.CreateEventTitle(title).Unwrap()
+                );
+        
+        builder
+            .Property(e => e.Description)
+            .HasConversion(
+                descriptionVo =>  descriptionVo.Description,
+                description => EventDescription.CreateEventDescription(description).Unwrap()
+            );
+        
+        builder
+            .Property(e => e.StartDate)
+            .HasConversion(
+                startDateVo =>  startDateVo.Value,
+                startDate => EventTime.Create(startDate.ToString()).Unwrap()
+            );
+        
+        builder
+            .Property(e => e.EndDate)
+            .HasConversion(
+                endDateVo =>  endDateVo.Value,
+                endDate => EventTime.Create(endDate.ToString()).Unwrap()
+            );
+        
+        builder
+            .Property(e => e.MaxParticipants)
+            .HasConversion(
+                maxParticipantsVo =>  maxParticipantsVo.Value,
+                maxParticipants => EventMaxParticipants.Create(maxParticipants).Unwrap()
+            );
+
+        builder.Property<EventType>("Type").HasConversion(
+            Type => Type.ToString(),
+            value =>(EventType)Enum.Parse(typeof(EventType), value));
+        
+        builder.Property<EventStatus>("Status").HasConversion(
+            Status => Status.ToString(),
+            value =>(EventStatus)Enum.Parse(typeof(EventType), value));
     }
 
     private void ConfigureLocation(EntityTypeBuilder<Location> builder)
