@@ -1,3 +1,4 @@
+using EventAssociation.Core.Domain.Common;
 using EventAssociation.Core.Tools.OperationResult;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,8 +41,4 @@ public class RepositoryBase<TAggr, TId>(DbContext context) : IGenericRepository<
         return Result<None>.Ok(None.Value);
         
     }
-}
-
-public interface IGenericRepository<T, T1>
-{
 }
