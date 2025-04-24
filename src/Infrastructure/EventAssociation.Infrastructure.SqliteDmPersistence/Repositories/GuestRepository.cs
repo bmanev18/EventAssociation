@@ -13,7 +13,7 @@ public class GuestRepository : RepositoryBase<Guest, GuestId>, IGuestRepository 
     public GuestRepository(DmContext context) : base(context)
     {
         _context = context;
-    }
+}
     
     public async Task<Result<List<Guest>>> GetAllAsync()
     {
