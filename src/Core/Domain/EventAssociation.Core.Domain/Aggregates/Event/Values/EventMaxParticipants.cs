@@ -5,13 +5,16 @@ namespace EventAssociation.Core.Domain.Aggregates.Event.Values;
 
     public class EventMaxParticipants: ValueObject
     {
-        public int Value { get;} //internal
+        internal int Value { get;}
+        private EventMaxParticipants()
+        {
+        }
+        
         private EventMaxParticipants(int value)
         {
             Value = value;
         }
-
-
+        
         public static Result<EventMaxParticipants> Create(int value)
         {
             var validationResult = Validate(value);

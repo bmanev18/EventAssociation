@@ -8,6 +8,11 @@ public class GuestId: ValueObject
     public Guid Value { get; }
     
     private GuestId(Guid guid) => Value = guid;
+
+    private GuestId()
+    {
+        
+    }
     
     public static GuestId Create() => new GuestId(Guid.NewGuid());
 

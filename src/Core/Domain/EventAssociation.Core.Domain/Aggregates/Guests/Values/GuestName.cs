@@ -9,7 +9,10 @@ public class GuestName: ValueObject
     public string lastName { get; private set; }
 
 
-
+    private GuestName() {
+        
+        
+    }
     private GuestName(string firstName, string lastName)
     {
         
@@ -95,8 +98,4 @@ public class GuestName: ValueObject
         throw new NotImplementedException();
     }
     
-    private GuestName()
-    {
-        
-    }
 }

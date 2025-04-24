@@ -8,6 +8,10 @@ public class EventTime: ValueObject
 {
     internal DateTime Value { get; }
     
+    private EventTime()
+    {
+    }
+    
     public EventTime(DateTime value)
     {
         Value = value;

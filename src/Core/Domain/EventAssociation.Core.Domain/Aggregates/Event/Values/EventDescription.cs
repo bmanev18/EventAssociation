@@ -7,6 +7,10 @@ public class EventDescription: ValueObject
 {
     internal string Description { get; }
     
+    private EventDescription()
+    {
+    }
+    
     private EventDescription(string description)
     {
         Description = description;
