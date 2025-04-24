@@ -1,4 +1,3 @@
-using EventAssociation.Core.Domain.Aggregates.Event.Bases;
 using EventAssociation.Core.Domain.Aggregates.Guests;
 using EventAssociation.Core.Domain.Aggregates.Guests.Values;
 using EventAssociation.Core.Tools.OperationResult;
@@ -42,17 +41,23 @@ public class GuestRepository : RepositoryBase<Guest, GuestId>, IGuestRepository 
             return Result<None>.Err(new Error("0",$"Error creating guest: {ex.Message}"));
         }
     }
-
-    public async Task<Result<None>> RemoveAsync(Guest guest)
+    
+    public async Task<Result<Guest>> GetGuestAsync(Guest guestId)
     {
-        try
-        {
-            var removedGuest = _context.Set<Guest>().Remove(guest);
-            return Result<None>.Ok(None.Value);
+        var guest = await _context.Set<Guest>().FindAsync(guestId);
+        if (guest == null) {
+            return Result<Guest>.Err(new Error("0", "No event was found"));
         }
-        catch (Exception ex)
-        {
-            return Result<None>.Err(new Error("0",$"Error deleting guest: {ex.Message}"));
+        return Result<Guest>.Ok(guest);
+    }
+
+    public async Task<Result<None>> RemoveAsync(Guest guestId)
+    {
+        var removedGuest = await _context.Set<Guest>().FindAsync(guestId);
+        if (removedGuest == null) {
+            return Result<None>.Err(new Error("0", "No event was found"));
         }
+        _context.Set<Guest>().Remove(removedGuest);
+        return Result<None>.Ok(None.Value);
     }
 }
