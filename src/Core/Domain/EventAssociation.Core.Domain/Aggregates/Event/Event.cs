@@ -8,17 +8,22 @@ namespace EventAssociation.Core.Domain.Aggregates.Event;
 
 public class Event : AggregateRoot
 {
-    internal EventId Id { get; }
+    public EventId Id { get; }
     internal EventTitle Title { get; private set; }
     internal EventDescription Description { get; private set; }
     internal EventTime? StartDate { get; private set; }
     internal EventTime? EndDate { get; private set; }
     internal EventMaxParticipants MaxParticipants { get; private set; }
-    internal EventType Type { get; private set; }
-    public EventStatus Status { get; private set; }
-    internal Location Location { get; private set; }
+    internal EventType Type { get; private set; } //internal
+    public EventStatus Status { get; private set; } 
+    internal Location Location { get; private set; } //internal
 
     internal GuestList guestList;
+
+    private Event()
+    {
+        
+    }
 
     public Event(EventId id, EventTitle title, EventDescription description, EventTime? startDate, EventTime? endDate,
         EventMaxParticipants maxParticipants, EventType type, EventStatus status, Location location)

@@ -4,12 +4,14 @@ namespace EventAssociation.Core.Domain.Aggregates.Locations.Values;
 
 public class LocationId : ValueObject
 {
-    private Guid Value { get; }
+    public Guid Value { get; }
     
-    public LocationId(Guid value)
-    {
-        Value = value;
-    }
+    private LocationId() { }
+    private LocationId(Guid guid) => Value = guid;
+    
+    public static LocationId Create() => new LocationId(Guid.NewGuid());
+    
+    public static LocationId FromGuid(Guid guid) => new LocationId(guid);
     
     protected override IEnumerable<object> GetEqualityComponents()
     {

@@ -5,10 +5,14 @@ namespace EventAssociation.Core.Domain.Aggregates.Guests.Values;
 
 public class GuestName: ValueObject
 {
-    internal string firstName { get; }
-    internal string lastName { get; }
+    public string firstName { get; private set; }
+    public string lastName { get; private set; }
 
 
+    private GuestName() {
+        
+        
+    }
     private GuestName(string firstName, string lastName)
     {
         
@@ -93,4 +97,5 @@ public class GuestName: ValueObject
     {
         throw new NotImplementedException();
     }
+    
 }

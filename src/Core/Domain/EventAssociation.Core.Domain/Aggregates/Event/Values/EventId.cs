@@ -6,12 +6,19 @@ namespace EventAssociation.Core.Domain.Aggregates.Event.Values;
 
 public class EventId: ValueObject
 {
-    private Guid Value { get; }
+    public Guid Value { get; }
+
+    private EventId()
+    {
+        
+    }
     
     public EventId(Guid value)
     {
         Value = value;
     }
+    
+    public static EventId FromGuid(Guid guid) => new EventId(guid);
 
     public static Result<EventId> Create(string id)
     {

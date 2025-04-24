@@ -27,10 +27,10 @@ public class FakeGuestRepository : IGuestRepository
         ];        
     }
     
-    public Task<Result<Guest>> CreateAsync(Guest guest)
+    public Task<Result<None>> CreateAsync(Guest guest)
     {
         _guests.Add(guest);
-        return Task.FromResult(Result<Guest>.Ok(guest));
+        return Task.FromResult(Result<None>.Ok(None.Value));
     }
 
     public Task<Result<Guest>> GetAsync(GuestId guestId)

@@ -5,7 +5,7 @@ namespace EventAssociation.Core.Domain.Aggregates.Guests;
 
 public interface IGuestRepository
 {
-    public Task<Result<Guest>> CreateAsync(Guest guest);
+    public Task<Result<None>> CreateAsync(Guest guest);
     public Task<Result<Guest>> GetAsync(GuestId guestId);
     public Task<Result<None>> RemoveAsync(GuestId guestId);
 }

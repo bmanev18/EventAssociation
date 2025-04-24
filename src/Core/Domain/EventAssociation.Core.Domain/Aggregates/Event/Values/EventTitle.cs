@@ -7,6 +7,10 @@ public class EventTitle : ValueObject
 {
     internal string Title { get; }
 
+    
+    private EventTitle()
+    {
+    }
     private EventTitle(string title)
     {
         Title = title;

@@ -5,7 +5,12 @@ namespace EventAssociation.Core.Domain.Aggregates.Guests.Values;
 
 public class GuestImageUrl : ValueObject
 {
-    internal Uri Value { get; }
+    public Uri Value { get; }
+
+    private GuestImageUrl()
+    {
+        
+    }
 
     private GuestImageUrl(Uri value)
     {

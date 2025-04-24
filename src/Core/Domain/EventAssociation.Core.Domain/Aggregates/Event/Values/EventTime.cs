@@ -6,7 +6,11 @@ namespace EventAssociation.Core.Domain.Aggregates.Event.Values;
 
 public class EventTime: ValueObject
 {
-    private DateTime Value { get; }
+    internal DateTime Value { get; }
+    
+    private EventTime()
+    {
+    }
     
     public EventTime(DateTime value)
     {
