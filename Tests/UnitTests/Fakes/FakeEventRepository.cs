@@ -69,10 +69,10 @@ public class FakeEventRepository: IEventRepository
             _events.Add(event3);
     }
     
-    public Task<Result<Event>> CreateAsync(Event event_)
+    public Task<Result<None>> CreateAsync(Event event_)
     {
         _events.Add(event_);
-        return Task.FromResult(Result<Event>.Ok(event_));
+        return Task.FromResult(Result<None>.Ok(None.Value));
     }
 
     public Task<Result<Event>> GetAsync(EventId eventId)
@@ -92,5 +92,10 @@ public class FakeEventRepository: IEventRepository
             return Task.FromResult(Result<None>.Ok(None.Value));
         }
         return Task.FromResult(Result<None>.Err(new Error("", "Event not found")));
+    }
+
+    public Task<Result<List<Event>>> GetAllEvents()
+    {
+        return Task.FromResult(Result<List<Event>>.Ok(_events));
     }
 }
