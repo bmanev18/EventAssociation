@@ -17,6 +17,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{9E95D440-87B8-46FA-8544-4C6362AE8C4A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{328F2B5E-C910-4563-AAFA-69FFD24774E6}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\Mocks\Guests.json = Tests\Mocks\Guests.json
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Tests\UnitTests\UnitTests.csproj", "{1295B8D3-6805-4A60-B935-EC6117068E77}"
 EndProject
@@ -40,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QueryContracts", "QueryCont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAssociation.Core.QueryContracts", "src\Core\QueryContracts\EventAssociation.Core.QueryContracts\EventAssociation.Core.QueryContracts.csproj", "{3B268E41-4533-4CA9-BEF1-B129C4955AD0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mocks", "Mocks", "{97802A77-9810-45B1-8193-6CA36F3B1803}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +66,7 @@ Global
 		{2879C600-F6B9-464F-A98C-2C485F43B6D9} = {0B6CE188-688A-4964-9B05-DF9460A0D71F}
 		{95BA010E-7406-46FE-9068-2687AF163AE0} = {3E7D4C64-2778-4821-A8A2-2FCCB2FAD57F}
 		{3B268E41-4533-4CA9-BEF1-B129C4955AD0} = {95BA010E-7406-46FE-9068-2687AF163AE0}
+		{97802A77-9810-45B1-8193-6CA36F3B1803} = {328F2B5E-C910-4563-AAFA-69FFD24774E6}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{06703580-EC31-4E71-B05E-78BA9B7A63A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
