@@ -16,10 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Queries\EventOverviewHandler\" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\..\Core\Domain\EventAssociation.Core.Domain\EventAssociation.Core.Domain.csproj" />
       <ProjectReference Include="..\..\Core\QueryContracts\EventAssociation.Core.QueryContracts\EventAssociation.Core.QueryContracts.csproj" />
     </ItemGroup>
 
