@@ -1,4 +1,6 @@
 ﻿using System.Text.Json;
+using System.IO;
+using System.Globalization;
 using EventAssociation.Infrastructure.EfcQueries.Models;
 
 namespace EventAssociation.Infrastructure.EfcQueries.SeedFactories;
@@ -9,7 +11,7 @@ public class EventSeedFactory
 
     public static List<Event> CreateEvents()
     {
-        var eventsTmps = JsonSerializer.Deserialize<List<TmpEvent>>(EventsAsJson)!;
+        List<TmpEvent> eventsTmps = JsonSerializer.Deserialize<List<TmpEvent>>(EventsAsJson)!;
 
         var events = eventsTmps.Select(e => new Event
         {
@@ -17,7 +19,7 @@ public class EventSeedFactory
             Title = e.Title,
             Description = e.Description,
             Status = e.Status,
-            Type = e.Visibility, 
+            Type = e.Visibility, // Mapping Visibility from JSON to Type in model
             StartDate = e.Start,
             EndDate = e.End,
             MaxParticipants = e.MaxGuests,
@@ -27,7 +29,7 @@ public class EventSeedFactory
         return events;
     }
 
-    private record TmpEvent(
+    public record TmpEvent(
         string Id, 
         string Title, 
         string Description, 
