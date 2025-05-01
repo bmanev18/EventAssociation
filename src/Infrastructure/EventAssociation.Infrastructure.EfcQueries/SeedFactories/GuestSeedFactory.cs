@@ -11,7 +11,7 @@ public class GuestSeedFactory
     public static List<Guest> CreateGuests()
     {
         
-        var guestsTmps = JsonSerializer.Deserialize<List<TmpGuest>>(GuestsAsJson)!;
+        List<TmpGuest> guestsTmps = JsonSerializer.Deserialize<List<TmpGuest>>(GuestsAsJson)!;
 
         var guests = guestsTmps.Select(g => new Guest
         {
