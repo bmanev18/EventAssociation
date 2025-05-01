@@ -17,9 +17,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{9E95D440-87B8-46FA-8544-4C6362AE8C4A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{328F2B5E-C910-4563-AAFA-69FFD24774E6}"
-	ProjectSection(SolutionItems) = preProject
-		Tests\Mocks\Guests.json = Tests\Mocks\Guests.json
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Tests\UnitTests\UnitTests.csproj", "{1295B8D3-6805-4A60-B935-EC6117068E77}"
 EndProject
@@ -44,6 +41,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAssociation.Core.QueryContracts", "src\Core\QueryContracts\EventAssociation.Core.QueryContracts\EventAssociation.Core.QueryContracts.csproj", "{3B268E41-4533-4CA9-BEF1-B129C4955AD0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mocks", "Mocks", "{97802A77-9810-45B1-8193-6CA36F3B1803}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\Mocks\Events.json = Tests\Mocks\Events.json
+		Tests\Mocks\Invitations.json = Tests\Mocks\Invitations.json
+		Tests\Mocks\JoinRequests.json = Tests\Mocks\JoinRequests.json
+		Tests\Mocks\Locations.json = Tests\Mocks\Locations.json
+		Tests\Mocks\Participations.json = Tests\Mocks\Participations.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,7 +7,8 @@ namespace EventAssociation.Infrastructure.EfcQueries.SeedFactories;
 
 public class EventSeedFactory
 {
-    private static string EventsAsJson => File.ReadAllText(Path.Combine("Tests", "Mocks", "Events.json"));
+    // private static string EventsAsJson => File.ReadAllText(Path.Combine("..","..", "..", "..", "Tests", "Mocks", "Guests.json"));
+    private static string EventsAsJson => File.ReadAllText("C:\\Users\\Bozhidar Manev\\Documents\\GitHub\\EventAssociation\\Tests\\Mocks\\Guests.json");
 
     public static List<Event> CreateEvents()
     {
