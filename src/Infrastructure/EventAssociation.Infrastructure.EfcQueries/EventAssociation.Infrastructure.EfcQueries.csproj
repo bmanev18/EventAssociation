@@ -15,4 +15,12 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.4" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Queries\EventOverviewHandler\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Core\QueryContracts\EventAssociation.Core.QueryContracts\EventAssociation.Core.QueryContracts.csproj" />
+    </ItemGroup>
+
 </Project>
