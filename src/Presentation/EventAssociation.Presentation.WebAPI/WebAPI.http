@@ -4,3 +4,16 @@ GET {{WebAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+POST {{WebAPI_HostAddress}}/api/guest/register
+Accept: application/json
+Content-Type: application/json
+
+{
+  "requestBody": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@via.dk",
+    "imageUrl": "https://example.com/image.jpg"
+  }
+}

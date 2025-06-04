@@ -17,8 +17,12 @@ public class CommandDispatcherTests
             .Setup(h => h.HandleAsync(command))
             .ReturnsAsync(Result<None>.Ok(None.Value));
 
-        var handlers = new List<object> { handlerMock.Object };
-        var dispatcher = new Dispatch(handlers);
+        var serviceProviderMock = new Mock<IServiceProvider>();
+        serviceProviderMock
+            .Setup(sp => sp.GetService(typeof(ICommandHandler<DeclineInvitationCommand>)))
+            .Returns(handlerMock.Object);
+
+        var dispatcher = new Dispatch(serviceProviderMock.Object);
 
         // Act
         var result = await dispatcher.DispatchAsync(command);
@@ -33,45 +37,53 @@ public class CommandDispatcherTests
     {
         // Arrange
         var command = DeclineInvitationCommand.Create(Guid.NewGuid().ToString()).Unwrap();
-        var dispatcher = new Dispatch(new List<object>());
+        var serviceProviderMock = new Mock<IServiceProvider>();
+        serviceProviderMock
+            .Setup(sp => sp.GetService(typeof(ICommandHandler<DeclineInvitationCommand>)))
+            .Returns(null); // Simulate handler not registered
+
+        var dispatcher = new Dispatch(serviceProviderMock.Object);
 
         // Act
         var result = await dispatcher.DispatchAsync(command);
 
         // Assert
         Assert.False(result.IsSuccess);
-        Assert.Equal("100", result.UnwrapErr().First().Code);
-        Assert.Equal($"No handler found for command {typeof(DeclineInvitationCommand).Name}", result.UnwrapErr()[0].Message);
+        var error = result.UnwrapErr().First();
+        Assert.Equal("100", error.Code);
+        Assert.Equal($"No handler found for command {typeof(DeclineInvitationCommand).Name}", error.Message);
     }
-    
+
     [Fact]
     public async Task DispatchAsync_CallsOnlyTheCorrectHandler()
     {
         // Arrange
         var declineCommand = DeclineInvitationCommand.Create(Guid.NewGuid().ToString()).Unwrap();
         var acceptCommand = AcceptInvitationCommand.Create(Guid.NewGuid().ToString()).Unwrap();
-        
+
         var declineHandlerMock = new Mock<ICommandHandler<DeclineInvitationCommand>>();
+        var acceptHandlerMock = new Mock<ICommandHandler<AcceptInvitationCommand>>();
+
         declineHandlerMock
             .Setup(h => h.HandleAsync(declineCommand))
             .ReturnsAsync(Result<None>.Ok(None.Value));
 
-        var acceptHandlerMock = new Mock<ICommandHandler<AcceptInvitationCommand>>();
-        acceptHandlerMock
-            .Setup(h => h.HandleAsync(acceptCommand))
-            .ReturnsAsync(Result<None>.Ok(None.Value));
-        
-        var handlers = new List<object> { declineHandlerMock.Object, acceptHandlerMock.Object };
-        var dispatcher = new Dispatch(handlers);
+        var serviceProviderMock = new Mock<IServiceProvider>();
+        serviceProviderMock
+            .Setup(sp => sp.GetService(typeof(ICommandHandler<DeclineInvitationCommand>)))
+            .Returns(declineHandlerMock.Object);
+        serviceProviderMock
+            .Setup(sp => sp.GetService(typeof(ICommandHandler<AcceptInvitationCommand>)))
+            .Returns(acceptHandlerMock.Object);
+
+        var dispatcher = new Dispatch(serviceProviderMock.Object);
 
         // Act
         var result = await dispatcher.DispatchAsync(declineCommand);
 
         // Assert
         Assert.True(result.IsSuccess);
-        
         declineHandlerMock.Verify(h => h.HandleAsync(declineCommand), Times.Once);
         acceptHandlerMock.Verify(h => h.HandleAsync(It.IsAny<AcceptInvitationCommand>()), Times.Never);
-        declineHandlerMock.Verify(h => h.HandleAsync(It.IsAny<DeclineInvitationCommand>()), Times.Once);
     }
 }

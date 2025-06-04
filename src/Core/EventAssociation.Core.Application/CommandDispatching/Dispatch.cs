@@ -6,27 +6,26 @@ namespace EventAssociation.Core.Application.CommandDispatching;
 
 public class Dispatch : ICommandDispatcher
 {
-    private readonly Dictionary<Type, object> _handlers;
+    private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<ICommandDispatcher>? _logger;
 
-    public Dispatch(IEnumerable<object> handlers, ILogger<ICommandDispatcher>? logger = null)
+    public Dispatch(IServiceProvider serviceProvider, ILogger<ICommandDispatcher>? logger = null)
     {
+        _serviceProvider = serviceProvider;
         _logger = logger;
-        _handlers = handlers.ToDictionary(handler => handler.GetType().GetInterfaces()
-            .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICommandHandler<>))
-            .GetGenericArguments()[0], handler => handler);
     }
 
     public async Task<Result<None>> DispatchAsync<TCommand>(TCommand command)
     {
-        if (_handlers.TryGetValue(typeof(TCommand), out var handlerObj) &&
-            handlerObj is ICommandHandler<TCommand> handler)
+        var handler = _serviceProvider.GetService<ICommandHandler<TCommand>>();
+
+        if (handler == null)
         {
-            return await handler.HandleAsync(command);
+            var errorMsg = $"No handler found for command {typeof(TCommand).Name}";
+            _logger?.LogError(errorMsg);
+            return Result<None>.Err(new Error("100", errorMsg));
         }
 
-        var errorMsg = $"No handler found for command {typeof(TCommand).Name}";
-        _logger?.LogError(errorMsg);
-        return Result<None>.Err(new Error("100", errorMsg));
+        return await handler.HandleAsync(command);
     }
 }

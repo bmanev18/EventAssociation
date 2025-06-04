@@ -21,10 +21,13 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\src\Core\Domain\EventAssociation.Core.Domain\EventAssociation.Core.Domain.csproj" />
       <ProjectReference Include="..\..\..\src\Infrastructure\EventAssociation.Infrastructure.EfcQueries\EventAssociation.Infrastructure.EfcQueries.csproj" />
+      <ProjectReference Include="..\..\..\src\Infrastructure\EventAssociation.Infrastructure.SqliteDmPersistence\EventAssociation.Infrastructure.SqliteDmPersistence.csproj" />
+      <ProjectReference Include="..\..\..\src\Presentation\EventAssociation.Presentation.WebAPI\EventAssociation.Presentation.WebAPI.csproj" />
       <ProjectReference Include="..\..\UnitTests\UnitTests.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.5" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
         <PrivateAssets>all</PrivateAssets>
