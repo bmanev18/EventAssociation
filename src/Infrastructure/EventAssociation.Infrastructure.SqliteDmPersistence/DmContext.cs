@@ -9,13 +9,17 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EventAssociation.Infrastructure.SqliteDmPersistence;
 
-public class DmContext(DbContextOptions options) : DbContext(options)
+public class DmContext : DbContext
 {
+    
     public DbSet<Guest> Guests => Set<Guest>();
     public DbSet<Location> Locations => Set<Location>();
     
     public DbSet<Event> Events => Set<Event>();
     
+    public DmContext(DbContextOptions<DmContext> options) : base(options)
+    {
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         ConfigureGuest(modelBuilder.Entity<Guest>());
