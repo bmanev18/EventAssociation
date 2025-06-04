@@ -1,12 +1,10 @@
 using EventAssociation.Infrastructure.EfcQueries.Models;
 using EventAssociation.Infrastructure.SqliteDmPersistence;
-using IntegrationTests.Shared;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace IntegrationTests.Factories;
 
