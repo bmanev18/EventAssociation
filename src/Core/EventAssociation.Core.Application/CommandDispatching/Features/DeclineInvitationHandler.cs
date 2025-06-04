@@ -18,8 +18,7 @@ public class DeclineInvitationHandler : ICommandHandler<DeclineInvitationCommand
         _repositoryEvent = repositoryEvent;
         this.uow = uow;
     }
-
-
+    
     public async Task<Result<None>> HandleAsync(DeclineInvitationCommand command)
     {
         var invitation = _repository.GetAsync(command._InvitationId);
@@ -33,8 +32,6 @@ public class DeclineInvitationHandler : ICommandHandler<DeclineInvitationCommand
             return Result<None>.Err(new Error("100", "Event for invitation does not exist."));
         }
         
-        //TODO: Change following checks to work when EFC figured out and guestlist has limit and to save to guest list
-
         var declineInvitation = invitation.Result.Unwrap()
             .DeclineInvitation(invitationEvent.Result.Unwrap().GetEventStatus());
 

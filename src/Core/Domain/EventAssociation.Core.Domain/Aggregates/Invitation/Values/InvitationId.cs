@@ -16,4 +16,6 @@ public class InvitationId: ValueObject
     {
         yield return Value;
     }
+    
+    public Guid GetValue() => Value;
 }
