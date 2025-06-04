@@ -25,7 +25,7 @@ public class RegisterGuestEndpointTest
             new RegisterGuestEndpointRequest.Body(
                 FirstName: "Michael",
                 LastName: "Jackson",
-                Email: "mj@via.dk",
+                Email: "mjmj@via.dk",
                 ImageUrl: "https://example.com/mj.jpg"
             )
         );
