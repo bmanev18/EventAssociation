@@ -6,9 +6,9 @@ namespace EventAssociation.Infrastructure.SqliteDmPersistence.Shared;
 
 public class EfcUnitOfWork : IUnitOfWork
 {
-    private readonly DbContext _context;
+    private readonly DmContext _context;
  
-    public EfcUnitOfWork(DbContext context)
+    public EfcUnitOfWork(DmContext context)
     {
         _context = context;
     }
