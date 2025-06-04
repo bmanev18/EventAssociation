@@ -11,8 +11,8 @@
 
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.3" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.4" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
         <PackageReference Include="Moq" Version="4.20.72" />
         <PackageReference Include="Scrutor" Version="6.0.1" />
@@ -39,6 +39,8 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\Core\Domain\EventAssociation.Core.Domain\EventAssociation.Core.Domain.csproj" />
       <ProjectReference Include="..\..\src\Core\EventAssociation.Core.Application\EventAssociation.Core.Application.csproj" />
+      <ProjectReference Include="..\..\src\Core\QueryContracts\EventAssociation.Core.QueryContracts\EventAssociation.Core.QueryContracts.csproj" />
+      <ProjectReference Include="..\..\src\Presentation\EventAssociation.Presentation.WebAPI\EventAssociation.Presentation.WebAPI.csproj" />
     </ItemGroup>
 
 </Project>
