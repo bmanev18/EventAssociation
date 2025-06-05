@@ -1,9 +1,6 @@
-﻿using Spublic class EventSeedFactory
-{
-    private static string EventsAsJson => File.ReadAllText(Path.Combine("..","..", "..", "..", "Tests", "Mocks", "Events.json"));
-    // private static string EventsAsJson => File.ReadAllText("C:\\Users\\Bozhidar Manev\\Documents\\GitHub\\EventAssociation\\Tests\\Mocks\\Events.json");m.Text.Json;
-using System.IO;
+﻿using System.IO;
 using System.Globalization;
+using System.Text.Json;
 using EventAssociation.Infrastructure.EfcQueries.Models;
 
 namespace EventAssociation.Infrastructure.EfcQueries.SeedFactories;
