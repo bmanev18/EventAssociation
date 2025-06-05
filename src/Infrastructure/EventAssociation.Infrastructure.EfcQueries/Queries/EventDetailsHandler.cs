@@ -10,22 +10,22 @@ public class EventDetailsHandler(EventAssociationProductionContext context) : IQ
     public async Task<EventsOverview.Answer> HandleAsync(EventsOverview.Query query)
     {
         List<EventsOverview.EventInfo> draftEvents = await context.Events
-            .Where(e => e.Status == "Draft")
+            .Where(e => e.Status.ToLower() == "draft")
             .Select(e => new EventsOverview.EventInfo(e.Title))
             .ToListAsync();
 
         List<EventsOverview.EventInfo> readyEvents = await context.Events
-            .Where(e => e.Status == "Ready")
+            .Where(e => e.Status.ToLower() == "ready")
             .Select(e => new EventsOverview.EventInfo(e.Title))
             .ToListAsync();
 
         List<EventsOverview.EventInfo> cancelledEvents = await context.Events
-            .Where(e => e.Status == "Cancelled")
+            .Where(e => e.Status.ToLower() == "cancelled")
             .Select(e => new EventsOverview.EventInfo(e.Title))
             .ToListAsync();
 
         
-        return new EventsOverview.Answer(draftEvents, readyEvents, cancelledEvents);
+        return new EventsOverview.Answer(readyEvents, draftEvents, cancelledEvents);
         
     }
 }
