@@ -11,12 +11,12 @@ namespace EventAssociation.Infrastructure.EfcQueries.Tests.Queries;
 
 public class EventDetailsHandlerTests
 {
-    [Fact(Skip = "Still figuring out")]
+    [Fact] // Removed Skip attribute
     public async Task HandleAsync_ReturnsCorrectlyCategorizedEvents()
     {
         // Arrange
         var context = Setup.SetupContext();
-        // var eventsData = Setup.Seed(context);
+        var eventsData = Setup.Seed(context);
         
         var handler = new EventDetailsHandler(context);
         var query = new EventsOverview.Query();
@@ -26,16 +26,25 @@ public class EventDetailsHandlerTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Collection(result.draftEvents,
-            e => Assert.Equal("Draft Event 1", e.Title),
-            e => Assert.Equal("Draft Event 2", e.Title));
-        Assert.Collection(result.readyEvents,
-            e => Assert.Equal("Ready Event A", e.Title),
-            e => Assert.Equal("Ready Event B", e.Title),
-            e => Assert.Equal("Ready Event C", e.Title));
-        Assert.Collection(result.cancelledEvents,
-            e => Assert.Equal("Cancelled Event X", e.Title));
+        
+        // Check draft events (5 events in Events.json with status "draft")
+        Assert.Equal(5, result.draftEvents.Count);
+        Assert.Contains(result.draftEvents, e => e.Title == "DnD introductions!");
+        Assert.Contains(result.draftEvents, e => e.Title == "Whiskey Tasting");
+        Assert.Contains(result.draftEvents, e => e.Title == "Card Stacking.");
+        Assert.Contains(result.draftEvents, e => e.Title == "Soap Carving");
+        Assert.Contains(result.draftEvents, e => e.Title == "Extreme Ironing");
+        
+        // Check ready events (4 events in Events.json with status "ready")
+        Assert.Equal(4, result.readyEvents.Count);
+        Assert.Contains(result.readyEvents, e => e.Title == "Chess and beer");
+        Assert.Contains(result.readyEvents, e => e.Title == "Beer Tasting!");
+        Assert.Contains(result.readyEvents, e => e.Title == "Art Exhibition");
+        Assert.Contains(result.readyEvents, e => e.Title == "Juggling");
+        
+        // Check cancelled events (2 events in Events.json with status "cancelled")
+        Assert.Equal(2, result.cancelledEvents.Count);
+        Assert.Contains(result.cancelledEvents, e => e.Title == "Learn to knit!");
+        Assert.Contains(result.cancelledEvents, e => e.Title == "Origami Introduction");
     }
-
-    
 }

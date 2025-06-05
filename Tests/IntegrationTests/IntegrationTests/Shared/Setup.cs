@@ -9,14 +9,12 @@ namespace IntegrationTests.Shared;
 
 public class Setup(DbContextOptions options) :DbContext(options)
 {
-    // public static EventAssociationProductionContext Seed(this EventAssociationProductionContext context)
-    // {
-    //     context.Guests.AddRange(GuestSeedFactory.CreateGuests());
-    //     context.Events.AddRange(EventSeedFactory.CreateEvents());
-    //     context.Locations.AddRange(LocationSeedFactory.CreateLocations());
-    //     context.SaveChanges();
-    //     return context;
-    // }
+    public static EventAssociationProductionContext Seed(EventAssociationProductionContext context)
+    {
+        context.Events.AddRange(EventSeedFactory.CreateEvents());
+        context.SaveChanges();
+        return context;
+    }
     public DbSet<Event> Events { get; set; }
     public DbSet<Guest> Guests { get; set; }
 
